@@ -1,0 +1,126 @@
+[{
+  "_id": {
+    "$oid": "64cb5cf89e31666974b6cf27"
+  },
+  "content": "Hay quá ạ",
+  "date": "14:53:28 03/08/2023",
+  "timestamps": {
+    "$numberLong": "1691049208106"
+  },
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "id_post": "64c9d1e94daabd6fbf2a76d2",
+  "status": "pending",
+  "createdAt": {
+    "$date": "2023-08-03T07:53:28.127Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-03T07:53:28.127Z"
+  },
+  "__v": 0,
+  "parent_comment_id": ""
+},
+{
+  "_id": {
+    "$oid": "64cf834e457e55ff0c578015"
+  },
+  "content": "Cảm ơn các bạn đã bình luận",
+  "date": "18:26:06 06/08/2023",
+  "timestamps": {
+    "$numberLong": "1691321166784"
+  },
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "id_post": "64c9d5884daabd6fbf2a7779",
+  "status": "pending",
+  "createdAt": {
+    "$date": "2023-08-06T11:26:06.799Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-06T11:26:06.799Z"
+  },
+  "__v": 0,
+  "parent_comment_id": ""
+},
+{
+  "_id": {
+    "$oid": "64cf84a4457e55ff0c5780c5"
+  },
+  "content": "Hay thật nếu biết sớm hơn kiếm tiền tỷ cũng dễ haha :))",
+  "date": "18:31:48 06/08/2023",
+  "timestamps": {
+    "$numberLong": "1691321508147"
+  },
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "id_post": "64cf7db8457e55ff0c577d60",
+  "status": "pending",
+  "createdAt": {
+    "$date": "2023-08-06T11:31:48.160Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-06T11:31:48.160Z"
+  },
+  "__v": 0,
+  "parent_comment_id": ""
+},
+{
+  "_id": {
+    "$oid": "64cf852f457e55ff0c57816e"
+  },
+  "content": "Ngày hôm nay nha mọi người 08/06/2023",
+  "date": "18:34:07 06/08/2023",
+  "timestamps": {
+    "$numberLong": "1691321647060"
+  },
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "id_post": "64c9d4374daabd6fbf2a775c",
+  "status": "pending",
+  "createdAt": {
+    "$date": "2023-08-06T11:34:07.071Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-06T11:34:07.071Z"
+  },
+  "__v": 0,
+  "parent_comment_id": ""
+},
+{
+  "_id": {
+    "$oid": "64d5a5096a2a2d61d1c93a7b"
+  },
+  "content": "Hôm nay ra chap mới nha mng ơi",
+  "date": "10:03:37 11/08/2023",
+  "timestamps": {
+    "$numberLong": "1691723017382"
+  },
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "id_post": "64c9d4374daabd6fbf2a775c",
+  "status": "pending",
+  "createdAt": {
+    "$date": "2023-08-11T03:03:37.396Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-11T03:03:37.396Z"
+  },
+  "__v": 0,
+  "parent_comment_id": ""
+},
+{
+  "_id": {
+    "$oid": "64d9fc0104ad0c55d4d53e89"
+  },
+  "content": "demo",
+  "date": "17:03:45 14/08/2023",
+  "timestamps": {
+    "$numberLong": "1692007425568"
+  },
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "id_post": "64c9d5884daabd6fbf2a7779",
+  "status": "pending",
+  "createdAt": {
+    "$date": "2023-08-14T10:03:45.581Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-14T10:03:45.581Z"
+  },
+  "__v": 0,
+  "parent_comment_id": ""
+}]

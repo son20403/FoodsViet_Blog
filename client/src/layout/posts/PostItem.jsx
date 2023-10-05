@@ -30,12 +30,12 @@ const PostItem = ({ isHome, data = {} }) => {
                             </Link>
                         </div>
                         <div className='flex items-center gap-x-2 lg:gap-x-4 mt-auto group-first:justify'>
-                            <Avatar image={dataCustomer[0].image}></Avatar>
-                            <p className='text-[11px] lg:text-sm font-medium'>{dataCustomer[0].full_name}</p>
+                            <Avatar image={dataCustomer[0]?.image}></Avatar>
+                            <p className='text-[11px] lg:text-sm font-medium'>{dataCustomer[0]?.full_name}</p>
                         </div>
                     </div>
-                    <DataPost timestamps={data.timestamps} comments={commentByPosts?.length}
-                        likes={data.likes}></DataPost>
+                    <DataPost timestamps={data?.timestamps} comments={commentByPosts?.length}
+                        likes={data?.likes}></DataPost>
                 </div>
             </div>
         </div>

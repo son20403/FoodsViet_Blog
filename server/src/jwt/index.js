@@ -9,7 +9,7 @@ const generateAccessToken = (customer) => {
         },
         process.env.JWT_ACCESS_KEY,
         {
-            expiresIn: "10s",
+            expiresIn: "1h",
         }
     );
 };
@@ -22,7 +22,7 @@ const generateRefreshToken = (customer) => {
         },
         process.env.JWT_REFRESH_KEY,
         {
-            expiresIn: "20s",
+            expiresIn: "1d",
         }
     );
 };

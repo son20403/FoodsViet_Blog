@@ -1,0 +1,199 @@
+[{
+  "_id": {
+    "$oid": "651a9347e8f4387f4f06cc2b"
+  },
+  "title": "Du lịch ẩm thực",
+  "image": "https://vcdn1-dulich.vnecdn.net/2022/08/09/HoThiKy-1-1660034628.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=yNbEkkiPk4q8so_SZH8BeA",
+  "id_image": "",
+  "date": "",
+  "timestamps": 1234,
+  "slug": "du-lich-am-thuc"
+},
+{
+  "_id": {
+    "$oid": "651a962476db82bdb7470d7f"
+  },
+  "title": "Công thức nấu ăn",
+  "image": "https://kenh14cdn.com/2020/7/2/pc1-15936560284471033429268.jpg",
+  "id_image": "",
+  "date": "",
+  "timestamps": 1234,
+  "slug": "cong-thuc-nau-an"
+},
+{
+  "_id": {
+    "$oid": "651a969976db82bdb7470d80"
+  },
+  "title": "Đánh giá nhà hàng",
+  "image": "https://20sfvn.com/wp-content/uploads/2022/09/thiet-ke-nha-hang-san-vuon.jpeg",
+  "id_image": "",
+  "date": "",
+  "timestamps": 1234,
+  "slug": "danh-gia-nha-hang"
+},
+{
+  "_id": {
+    "$oid": "651a970d76db82bdb7470d81"
+  },
+  "title": "Mẹo và kỹ thuật nấu ăn",
+  "image": "https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2022/4/1/nau-an-o-nha-co-loi-gi1-1648808726678627140069.jpg",
+  "id_image": "",
+  "date": "",
+  "timestamps": 1234,
+  "slug": "meo-va-ky-thuat-nau-an"
+},
+{
+  "_id": {
+    "$oid": "651a97c776db82bdb7470d82"
+  },
+  "title": "Đồ uống Việt Nam",
+  "image": "https://imgs.vietnamnet.vn/Images/2017/02/06/17/20170206174036-1.jpg",
+  "id_image": "",
+  "date": "",
+  "timestamps": 1234,
+  "slug": "do-uong-viet-nam"
+},
+{
+  "_id": {
+    "$oid": "651a984f76db82bdb7470d83"
+  },
+  "title": "Món chay",
+  "image": "https://therice.vn/wp-content/uploads/2022/09/cach-lam-banh-xeo-chay.jpg",
+  "id_image": "",
+  "date": "",
+  "timestamps": 1234,
+  "slug": "mon-chay"
+},
+{
+  "_id": {
+    "$oid": "651a98ab76db82bdb7470d84"
+  },
+  "title": "Món ăn vặt",
+  "image": "https://bizweb.dktcdn.net/100/004/714/articles/banh-trang-tron.jpg?v=1569828842117",
+  "id_image": "",
+  "date": "",
+  "timestamps": 1234,
+  "slug": "mon-an-vat"
+},
+{
+  "_id": {
+    "$oid": "651a992076db82bdb7470d85"
+  },
+  "title": "Ẩm thực các vùng miền",
+  "image": "https://dulich9.com/wp-content/uploads/2019/02/Du-lich-mien-Bac-nen-di-dau.jpg",
+  "id_image": "",
+  "date": "",
+  "timestamps": 1234,
+  "slug": "am-thuc-cac-vung-mien"
+},
+{
+  "_id": {
+    "$oid": "64c7dfd7fd74b945d7fadcd6"
+  },
+  "title": "Game",
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "status": "approved",
+  "createdAt": {
+    "$date": "2023-07-31T16:22:47.840Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-10T16:41:33.862Z"
+  },
+  "date": "12:55:56 01/08/2023",
+  "authorType": "customer",
+  "__v": 0,
+  "slug": "game"
+},
+{
+  "_id": {
+    "$oid": "64c7dff6ece7e4800f533558"
+  },
+  "title": "Du Lịch",
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "status": "approved",
+  "createdAt": {
+    "$date": "2023-07-31T16:23:18.184Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-10T16:41:31.702Z"
+  },
+  "date": "13:13:43 01/08/2023",
+  "authorType": "customer",
+  "__v": 0,
+  "slug": "du-lich"
+},
+{
+  "_id": {
+    "$oid": "64c7dffdece7e4800f53355b"
+  },
+  "title": "Kinh Doanh",
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "status": "approved",
+  "createdAt": {
+    "$date": "2023-07-31T16:23:25.871Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-11T03:14:40.350Z"
+  },
+  "date": "13:25:36 01/08/2023",
+  "authorType": "customer",
+  "__v": 0,
+  "slug": "kinh-doanh"
+},
+{
+  "_id": {
+    "$oid": "64c7e003ece7e4800f53355e"
+  },
+  "title": "Công nghệ",
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "status": "approved",
+  "createdAt": {
+    "$date": "2023-07-31T16:23:31.873Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-10T16:41:22.685Z"
+  },
+  "date": "13:42:36 01/08/2023",
+  "authorType": "customer",
+  "__v": 0,
+  "slug": "cong-nghe"
+},
+{
+  "_id": {
+    "$oid": "64c7e4ec984c1b40ed3e4788"
+  },
+  "title": "Giải trí",
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "status": "approved",
+  "createdAt": {
+    "$date": "2023-07-31T16:44:28.478Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-11T03:11:59.635Z"
+  },
+  "date": "14:05:11 01/08/2023",
+  "authorType": "customer",
+  "__v": 0,
+  "slug": "giai-tri"
+},
+{
+  "_id": {
+    "$oid": "64c9d39b4daabd6fbf2a772d"
+  },
+  "title": "Anime Manga",
+  "id_customer": "64c4c21f10cf10d29d0e0428",
+  "status": "approved",
+  "slug_history": [
+    "anime-manga"
+  ],
+  "slug": "anime-manga",
+  "date": "14:25:16 01/08/2023",
+  "authorType": "customer",
+  "createdAt": {
+    "$date": "2023-08-02T03:55:07.949Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-10T17:01:21.144Z"
+  },
+  "__v": 0
+}]

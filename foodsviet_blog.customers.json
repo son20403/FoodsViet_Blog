@@ -1,0 +1,43 @@
+[{
+  "_id": {
+    "$oid": "64c4c21f10cf10d29d0e0428"
+  },
+  "user_name": "son123",
+  "email": "sonntpd05961@fpt.edu.vn",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$nfnbrfFA/KqGOz+69Eh8Kw$TJOG1SezXTkG2qW/YnmcxrbXD35RIBYr6ZM1P/FYNKk",
+  "image": "https://res.cloudinary.com/dumtfciwr/image/upload/v1692007471/React_Blogger/mgvaer6nyzqec93s8cpv.jpg",
+  "full_name": "Nguyen Truong Son",
+  "id_image": "React_Blogger/mgvaer6nyzqec93s8cpv",
+  "address": "Cầu Tam Kỳ",
+  "createdAt": {
+    "$date": "2023-07-29T07:39:11.727Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-14T10:04:31.897Z"
+  },
+  "__v": 0,
+  "slug": "nguyen-truong-son"
+},
+{
+  "_id": {
+    "$oid": "64d75055bbcf0cc3f388ba2a"
+  },
+  "user_name": "chien1505",
+  "email": "chiendd1505@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$bKEWj8AsRaPq/SGJHXbGVw$Ae0P/gg/tfQgTmhYMVE2fcVPKR4/9en5tXPONgLgYGw",
+  "image": "https://res.cloudinary.com/dumtfciwr/image/upload/v1691839114/React_Blogger/wx5qjkrkwuv1xzjelc7m.jpg",
+  "full_name": "Nguyễn Tấn Lực",
+  "id_image": "React_Blogger/wx5qjkrkwuv1xzjelc7m",
+  "address": "Tam Kỳ - Quảng Nam",
+  "slug_history": [
+    "doan-dinh-chien"
+  ],
+  "slug": "doan-dinh-chien",
+  "createdAt": {
+    "$date": "2023-08-12T09:26:45.556Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-12T11:18:29.255Z"
+  },
+  "__v": 0
+}]

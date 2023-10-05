@@ -19,7 +19,7 @@ export default withMT({
       },
       fontFamily: {
         'logo': ['Mr Dafoe', 'ui-sans-serif', 'system-ui'],
-        'heading': ['Lora', 'ui-sans-serif', 'system-ui'],
+        'heading': ['Fira Sans', 'ui-sans-serif', 'system-ui'],
       },
 
       boxShadow: {
