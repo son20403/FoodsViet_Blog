@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@layer base {
+    html {
+        font-family: Inter, system-ui, sans-serif;
+        /* 
+        font-family: 'Mr Dafoe', cursive;
+        font-family: 'Poppins', sans-serif;
+        font-family: 'Inter', sans-serif;
+        */
+    }
+
+    input {
+        @apply outline-none
+    }
+}
+
+
+
+/* Tùy chỉnh nút prev tương tự */
+.swiper-button-prev {
+    left: 0 !important;
+}
+
+.swiper-button-next {
+    right: 0 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    background-color: hsla(15, 100%, 59%, 0.5);
+    padding: 25px;
+
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 20px !important;
+    /* Đặt font-weight thích hợp cho biểu tượng dựa trên Font Awesome 5 */
+    color: #fff;
+}
+
+.swiper-button-next::after {
+    content: "\f054";
+}
+
+.swiper-button-prev::after {
+    content: "\f053";
+}
+
+/* Ẩn nút trên tất cả các màn hình */
+.swiper-button-next,
+.swiper-button-prev {
+    display: none !important;
+}
+
+/* Hiển thị nút trên màn hình có chiều rộng tối thiểu là 768px (ví dụ: màn hình tablet trở lên) */
+@media (min-width: 768px) {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: flex !important;
+    }
+}
+
+/* customs post_item */
+
+.post_item:first-child {
+    margin-bottom: 20px;
+}
+
+.post_item:first-child .post_item-img {
+    height: 100%;
+}
+
+.post_item:first-child .post_item-icon {
+    color: #fff;
+
+}
+
+
+.post_item:first-child .post_item-content {
+    position: absolute;
+    background-image: linear-gradient(to top, black -30%, transparent 140%);
+    inset: 0px;
+    display: flex;
+    color: #fff;
+}
+
+.textarea_custom .isErr {
+    border: 0.1px solid red !important;
+    border-radius: 3px;
+}
+
+.content_post * {
+    text-align: justify !important;
+    font-size: small !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    max-height: 100% !important;
+    font-family: Inter, system-ui, sans-serif !important;
+}
+
+.content_post h1,
+.content_post h2,
+.content_post h3,
+.content_post h4,
+.content_post h5,
+.content_post h6,
+.content_post strong {
+    font-family: Lora, system-ui, sans-serif !important;
+}
+
+.content_post * {
+    line-height: normal !important;
+}
+
+.content_post img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    max-height: 100% !important;
+    display: block !important;
+    object-fit: contain !important;
+}
+
+@media (min-width: 720px) {
+    .content_post * {
+        font-size: medium !important;
+    }
+}
+
+/* App.css (hoặc tương tự) */
+.item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    /* height: 300px; */
+    height: auto !important;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+}
