@@ -46,10 +46,10 @@ const SlideSwiper = ({ dataPost }) => {
                         },
                     }
                 }
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
+                // autoplay={{
+                //     delay: 2500,
+                //     disableOnInteraction: false,
+                // }}
                 modules={[EffectCoverflow, Autoplay]}
                 className="mySwiper">
                 {

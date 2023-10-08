@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { postsRequest } from '../sagas/posts/postsSlice';
 import { categoriesRequest } from '../sagas/categories/categoriesSlice';
 import { customersRequest } from '../sagas/customers/customersSlice';
-import { commentsRequest } from '../sagas/comments/commentsSlice';
+import { commentsRequest, setNotify } from '../sagas/comments/commentsSlice';
 
 function MainLayout() {
     const dispatch = useDispatch()
@@ -21,9 +21,10 @@ function MainLayout() {
         dispatch(categoriesRequest(token || tokenLocal))
         dispatch(customersRequest(token || tokenLocal))
         dispatch(commentsRequest(token || tokenLocal))
+        dispatch(setNotify())
     }, [token, dispatch, tokenLocal, location.pathname]);
     return (
-        <div className='relative min-h-[1000px] max-w-[1600px] m-auto flex flex-col'>
+        <div className='relative min-h-[1000px] max-w-[1600px] m-auto flex flex-col '>
             <Header />
             <Outlet />
             <Footer />

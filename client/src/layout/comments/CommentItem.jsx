@@ -8,20 +8,43 @@ import useClickOutSide from '../../hooks/useClickOutSide';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useTimeSince from '../../hooks/useTimeSince';
+import { getDate, getTimestamp } from '../../hooks/useGetTime';
+import { commentsRequest, postCommentsRequest } from '../../sagas/comments/commentsSlice';
 
 const schemaValidateReply = Yup.object({
-    comment: Yup.string().required("Vui lòng nhập bình luận!")
+    content: Yup.string().required("Vui lòng nhập bình luận!")
 })
-const CommentItem = ({ comment, replies = () => { }, countR = 0 }) => {
-
+const CommentItem = ({ comment, replies = () => { }, countR = 0, id_post }) => {
+    const dispatch = useDispatch()
+    const timeSince = useTimeSince()
+    const { customers } = useSelector((state) => state.customers);
+    const customerByComment = customers.filter((cus) => cus._id === comment.id_customer)[0]
+    const countReply = countR + 1
+    const listReplies = replies(comment._id);
+    const { show: showReply, setShow: setShowReply, domRef: domReply } = useClickOutSide("#reply");
+    const { show: showEdit, setShow: setShowEdit, domRef: domEdit } = useClickOutSide("#edit_comment");
+    const { token } = useSelector((state => state.auth))
     // REPLY :)
     const { handleSubmit: handleSubmitReply, formState: { errors: errorsReply,
         isSubmitting: isSubmittingReply, isValid: isValidReply }, control: controlReply } =
         useForm({ resolver: yupResolver(schemaValidateReply), mode: 'onBlur', })
-    const handleReply = (value) => {
-        console.log("🚀 ~ file: CommentItem.jsx:20 ~ handleReply ~ value:", value)
+
+    const handleReplyComment = (value) => {
+        const date = getDate()
+        const timestamps = getTimestamp()
+        const comments = {
+            ...value,
+            id_post,
+            date,
+            timestamps,
+            parent_comment_id: comment._id
+        }
+        dispatch(postCommentsRequest({ token, comment: comments }))
+        dispatch(commentsRequest(token))
+        setShowReply(false)
+
     }
 
     // EDIT COMMENT
@@ -29,16 +52,7 @@ const CommentItem = ({ comment, replies = () => { }, countR = 0 }) => {
         isSubmitting: isSubmittingEditComment, isValid: isValidEditComment }, control: controlEditComment } =
         useForm({ resolver: yupResolver(schemaValidateReply), mode: 'onBlur', })
     const handleEditComment = (value) => {
-        console.log("🚀 ~ file: CommentItem.jsx:27 ~ handleEditComment ~ value:", value)
     }
-    const timeSince = useTimeSince()
-    const { customers } = useSelector((state) => state.customers);
-    const customerByComment = customers.filter((cus) => cus._id === comment.id_customer)[0]
-    console.log("🚀 ~ file: CommentItem.jsx:37 ~ CommentItem ~ customerByComment:", customerByComment)
-    const countReply = countR + 1
-    const listReplies = replies(comment.id);
-    const { show: showReply, setShow: setShowReply, domRef: domReply } = useClickOutSide("#reply");
-    const { show: showEdit, setShow: setShowEdit, domRef: domEdit } = useClickOutSide("#edit_comment");
     const handleShowReply = () => {
         setShowReply(!showReply)
         setShowEdit(false)
@@ -74,10 +88,10 @@ const CommentItem = ({ comment, replies = () => { }, countR = 0 }) => {
                             {/* REPLY */}
                             <div className={`mt-5 lg:mb-10 w-full bg-white border py-3 px-2 
                                 ${showReply ? 'block' : 'hidden'}`}>
-                                <form onSubmit={handleSubmitReply(handleReply)} id='reply' autoComplete='off'
+                                <form onSubmit={handleSubmitReply(handleReplyComment)} id='reply' autoComplete='off'
                                     className='flex items-center gap-x-4'>
                                     <div className='flex-1'>
-                                        <Input name={'comment'} control={controlReply} errors={errorsReply} value=''
+                                        <Input name={'content'} control={controlReply} errors={errorsReply} value=''
                                             type='text' placeholder='Nhập nội dung bình luận' >
                                             <CommentIcon></CommentIcon>
                                         </Input>
@@ -98,7 +112,7 @@ const CommentItem = ({ comment, replies = () => { }, countR = 0 }) => {
                                     id='edit_comment' autoComplete='off'
                                     className='flex items-center gap-x-4'>
                                     <div className='flex-1'>
-                                        <Input name={'comment'} control={controlEditComment} errors={errorsEditComment}
+                                        <Input name={'content'} control={controlEditComment} errors={errorsEditComment}
                                             value='' type='text' placeholder='Sửa bình luận' >
                                             <CommentIcon></CommentIcon>
                                         </Input>
@@ -113,15 +127,15 @@ const CommentItem = ({ comment, replies = () => { }, countR = 0 }) => {
                             </div>
                         </div></div>
                     {/* LIST COMMENT REPLY 1 lần */}
-                    {listReplies?.length > 0 && countReply < 2 && listReplies.map(reply => (
-                        <CommentItem key={reply.id} comment={reply} replies={replies}
-                            countR={countReply}></CommentItem>
+                    {listReplies?.length > 0 && countReply < 3 && listReplies.map(reply => (
+                        <CommentItem key={reply._id} comment={reply} replies={replies}
+                            countR={countReply} id_post={id_post}></CommentItem>
                     ))}
                 </div>
             </div>
             {/* LIST COMMENT REPLY lần 2 trở lên */}
-            {listReplies?.length > 0 && countReply > 1 && listReplies.map(reply => (
-                <CommentItem key={reply.id} comment={reply} replies={replies} countR={countReply}></CommentItem>
+            {listReplies?.length > 0 && countReply > 2 && listReplies.map(reply => (
+                <CommentItem key={reply._id} comment={reply} replies={replies} countR={countReply} id_post={id_post}></CommentItem>
             ))}
         </div>
     );

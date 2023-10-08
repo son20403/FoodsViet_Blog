@@ -10,6 +10,7 @@ import ListPost from '../layout/posts/ListPost';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup";
+import PageWrap from '../layout/common/PageWrap';
 
 const schemaValidate = Yup.object({
     // user_name: Yup.string().required("Vui lòng nhập tên đăng nhập!")
@@ -34,64 +35,66 @@ const InfoUser = () => {
         console.log("🚀 ~ file: InfoUser.jsx:37 ~ handleEditUser ~ value:", value)
     }
     return (
-        <div className='my-10 page-content'>
-            <form onSubmit={handleSubmit(handleEditUser)} className=' px-2'>
-                <div className=' flex justify-between items-center border-b border-primary pb-5'>
-                    <Heading isHeading className=''>Profile</Heading>
-                    <Button type='submit'>SAVE</Button>
-                </div>
-                <div className='flex gap-x-5 items-center my-10'>
-                    <Avatar className='!h-20 !w-20 md:!h-24 md:!w-24'></Avatar>
-                    <div className='flex-1 flex items-center gap-x-5'>
-                        <Button className=''>Change photo</Button>
-                        <Button className='bg-white !text-black border-primary'>Delete</Button>
+        <PageWrap>
+            <div className='my-10 page-content'>
+                <form onSubmit={handleSubmit(handleEditUser)} className=' px-2'>
+                    <div className=' flex justify-between items-center border-b border-primary pb-5'>
+                        <Heading isHeading className=''>Profile</Heading>
+                        <Button type='submit'>SAVE</Button>
                     </div>
+                    <div className='flex gap-x-5 items-center my-10'>
+                        <Avatar className='!h-20 !w-20 md:!h-24 md:!w-24'></Avatar>
+                        <div className='flex-1 flex items-center gap-x-5'>
+                            <Button className=''>Change photo</Button>
+                            <Button className='bg-white !text-black border-primary'>Delete</Button>
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3 gap-x-10'>
+                        <Field>
+                            {/* <Label htmlFor='full_name'>Full name</Label> */}
+                            <Input control={control} value={''} errors={errors}
+                                placeholder='Full name' type='text' name='full_name'>
+                                <UserIcon></UserIcon>
+                            </Input>
+                        </Field>
+                        <Field>
+                            {/* <Label htmlFor='user_name'>User name</Label> */}
+                            <Input control={control} value={''} errors={errors}
+                                placeholder='User Name' type='text' name='user_name' >
+                                <AtIcon></AtIcon>
+                            </Input>
+                        </Field>
+                        <Field>
+                            {/* <Label htmlFor='email'>Email</Label> */}
+                            <Input control={control} value={''} errors={errors}
+                                placeholder='Email' type='email' name='email' >
+                                <EmailIcon></EmailIcon>
+                            </Input>
+                        </Field>
+                        <Field>
+                            {/* <Label htmlFor='address'>Address</Label> */}
+                            <Input control={control} value={''} errors={errors}
+                                placeholder='Address' type='text' name='address' >
+                                <LocationIcon></LocationIcon>
+                            </Input>
+                        </Field>
+                        <Field>
+                            {/* <Label htmlFor='password'>Password</Label> */}
+                            <InputPassword control={control} value={''} errors={errors}
+                                placeholder='Password' name='password'>
+                                <LockIcon></LockIcon>
+                            </InputPassword>
+                        </Field>
+                    </div>
+                </form>
+                <div className='my-10'>
+                    <Heading isHeading className='mb-10 mx-2'>
+                        Popular Category
+                    </Heading>
+                    <ListPost></ListPost>
                 </div>
-                <div className='grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3 gap-x-10'>
-                    <Field>
-                        {/* <Label htmlFor='full_name'>Full name</Label> */}
-                        <Input control={control} value={''} errors={errors}
-                            placeholder='Full name' type='text' name='full_name'>
-                            <UserIcon></UserIcon>
-                        </Input>
-                    </Field>
-                    <Field>
-                        {/* <Label htmlFor='user_name'>User name</Label> */}
-                        <Input control={control} value={''} errors={errors}
-                            placeholder='User Name' type='text' name='user_name' >
-                            <AtIcon></AtIcon>
-                        </Input>
-                    </Field>
-                    <Field>
-                        {/* <Label htmlFor='email'>Email</Label> */}
-                        <Input control={control} value={''} errors={errors}
-                            placeholder='Email' type='email' name='email' >
-                            <EmailIcon></EmailIcon>
-                        </Input>
-                    </Field>
-                    <Field>
-                        {/* <Label htmlFor='address'>Address</Label> */}
-                        <Input control={control} value={''} errors={errors}
-                            placeholder='Address' type='text' name='address' >
-                            <LocationIcon></LocationIcon>
-                        </Input>
-                    </Field>
-                    <Field>
-                        {/* <Label htmlFor='password'>Password</Label> */}
-                        <InputPassword control={control} value={''} errors={errors}
-                            placeholder='Password' name='password'>
-                            <LockIcon></LockIcon>
-                        </InputPassword>
-                    </Field>
-                </div>
-            </form>
-            <div className='my-10'>
-                <Heading isHeading className='mb-10 mx-2'>
-                    Popular Category
-                </Heading>
-                <ListPost></ListPost>
             </div>
-        </div>
+        </PageWrap>
     );
 };
 

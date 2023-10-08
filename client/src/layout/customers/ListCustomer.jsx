@@ -1,16 +1,19 @@
 import React from 'react';
 import ItemImage from '../ItemImage';
 import ListWrapItem from '../common/ListWrapItem';
+import ItemImageSkeleton from '../ItemImageSketeton';
 
-const ListCustomer = () => {
+const ListCustomer = ({ data }) => {
+    const arr = Array(12).fill(null);
     return (
         <ListWrapItem>
-            <ItemImage image={'https://anduc.edu.vn/hinh-anh-hoat-hinh-dep-nhat/imager_7_36042_700.jpg'} title={'Nguyen Truong Son'}></ItemImage>
-            <ItemImage image={'https://anduc.edu.vn/hinh-anh-hoat-hinh-dep-nhat/imager_7_36042_700.jpg'} title={'Nguyen Van Hoai'}></ItemImage>
-            <ItemImage image={'https://anduc.edu.vn/hinh-anh-hoat-hinh-dep-nhat/imager_7_36042_700.jpg'} title={'Le Van Minh Thu'}></ItemImage>
-            <ItemImage image={'https://anduc.edu.vn/hinh-anh-hoat-hinh-dep-nhat/imager_7_36042_700.jpg'} title={'Nguyen Van Chuong'}></ItemImage>
-            <ItemImage image={'https://anduc.edu.vn/hinh-anh-hoat-hinh-dep-nhat/imager_7_36042_700.jpg'} title={'Nguyen Tan Luc'}></ItemImage>
-            <ItemImage image={'https://anduc.edu.vn/hinh-anh-hoat-hinh-dep-nhat/imager_7_36042_700.jpg'} title={'Trinh Sang'}></ItemImage>
+            {data?.length > 0 ? data?.map((item) => (
+                <ItemImage key={item._id} data={item} ></ItemImage>
+            )) :
+                arr.map((item, index) => (
+                    <ItemImageSkeleton key={index} ></ItemImageSkeleton>
+                ))
+            }
         </ListWrapItem>
     );
 };

@@ -9,19 +9,26 @@ class CommentController extends BaseController {
     create = async (req, res) => {
         const id_customer = req.customer.id;
         const comment = req.body
+        console.log("🚀 ~ file: CommentController.js:12 ~ CommentController ~ create= ~ comment:", comment)
         try {
-            const modelComment = {
-                ...comment,
-                id_customer
-            };
-            const dataComment = await this.model(modelComment).save();
-            if (dataComment) {
-                return res.status(200).json({
-                    message: "Cảm ơn bạn đã bình luận!",
-                });
+            if (comment) {
+                const modelComment = {
+                    ...comment,
+                    id_customer
+                };
+                const dataComment = await this.model(modelComment).save();
+                if (dataComment) {
+                    return res.status(200).json({
+                        message: "Cảm ơn bạn đã bình luận!",
+                    });
+                } else {
+                    return res.status(401).json({
+                        message: "Bình luận thất bại!",
+                    });
+                }
             } else {
                 return res.status(401).json({
-                    message: "Bình luận thất bại!",
+                    message: "Bạn chưa nhập nội dung nào!",
                 });
             }
         } catch (error) {

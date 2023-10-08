@@ -4,7 +4,7 @@ import { generateAccessToken } from "../jwt";
 const middlewareAuth = {
   verifyToken: (req, res, next) => {
     const token = req.headers.token;
-    if (!token) return res.status(401).json("You're not authenticated");
+    if (!token) return res.status(401).json({ message: "You're not authenticated" });
     const accessToken = token.split(" ")[1];
     jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, (err, customer) => {
       if (err) {
@@ -31,7 +31,7 @@ const middlewareAuth = {
       if (req.customer && req.customer.role === role) {
         next();
       } else {
-        res.status(403).json(`You're not authenticated as ${role}`);
+        res.status(403).json({ message: `You're not authenticated as ${role}` });
       }
     };
   },

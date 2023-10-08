@@ -10,7 +10,7 @@ require('dotenv').config()
 
 const app = express()
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // Cho phép gửi cookies
     optionsSuccessStatus: 204,

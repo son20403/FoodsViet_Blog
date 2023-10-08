@@ -1,8 +1,7 @@
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
-import { lazy, useEffect } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { lazy } from 'react';
 import MainLayout from './layout/MainLayout.';
 import { useSelector } from 'react-redux';
-import ScrollToTop from './layout/common/ScrollToTop';
 
 const InfoUser = lazy(() => import("./pages/InfoUser"));
 const DetailPage = lazy(() => import("./pages/DetailPage"));
@@ -16,7 +15,6 @@ function App() {
   const { token } = useSelector(state => state.auth);
   return (
     <div>
-      <ScrollToTop />
       <Routes>
         {token ?
           (<>

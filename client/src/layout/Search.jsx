@@ -9,8 +9,8 @@ const Search = ({ showSearch, handleShowSearch }) => {
     return (
         <>
             <Overlay show={showSearch} onClick={handleShowSearch}></Overlay>
-            <div className={`flex-1 absolute bg-white-cream flex w-full justify-center gap-5 transition-all
-                left-0 flex-col px-5 py-5 text-sm z-[12] shadow-soft border-t border-primary 
+            <div className={`flex-1 absolute bg-white-cream bg-opacity-50 flex w-full justify-center gap-5 transition-all backdrop-blur
+                left-0 flex-col px-5 py-5 text-sm z-[12] shadow-soft border-t border-primary bad
                 ${showSearch ? 'top-0' : 'invisible -top-[500px]'}`}
             >
                 <div className='absolute top-2 right-2 text-2xl text-primary cursor-pointer' onClick={handleShowSearch}>

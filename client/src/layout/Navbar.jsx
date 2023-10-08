@@ -39,7 +39,7 @@ const Navbar = ({ showNavbar, handleShowNavbar }) => {
             <div className={`flex-1 absolute bg-white-cream flex top-full w-full justify-center gap-5 transition-all
                 flex-col px-5 py-5 text-sm z-[10] shadow-soft border-t border-primary
                 ${showNavbar ? 'left-0' : '-left-full'}
-                lg:gap-10 md:static md:flex-row md:p-0 md:bg-transparent md:flex md:gap-5
+                lg:gap-10 md:static md:flex-row md:p-0 md:bg-transparent md:flex md:gap-5 
                 md:shadow-transparent md:border-0`}>
                 {listLink.map(({ to, title, id }) => (
                     <NavLink

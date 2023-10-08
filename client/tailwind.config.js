@@ -18,7 +18,7 @@ export default withMT({
         'white-cream': '#f9f9f9',
       },
       fontFamily: {
-        'logo': ['Mr Dafoe', 'ui-sans-serif', 'system-ui'],
+        'logo': ['Sora', 'ui-sans-serif', 'system-ui'],
         'heading': ['Fira Sans', 'ui-sans-serif', 'system-ui'],
       },
 
@@ -29,7 +29,8 @@ export default withMT({
       backgroundImage: {
         'theme-signup': "url('./src/assets/image/top-view-meat-soup-with-greens-tomato-dark-meat-color-gray-sauce-meal-hot-food-potato-photo-dinner-dish.jpg')",
         'theme-signin': "url('./src/assets/image/bigstock-Vietnamese-Dishes-Set-191527378.jpg')",
-        'theme-repeat': "url('https://static.vecteezy.com/system/resources/previews/009/344/913/original/food-seamless-pattern-cuisine-fast-food-wallpaper-with-gastronomy-icons-brown-pastelle-sepia-color-texture-decorative-textile-wrapping-paper-design-bright-background-for-menu-receipts-vector.jpg')"
+        'theme-repeat': "url('https://static.vecteezy.com/system/resources/previews/009/344/913/original/food-seamless-pattern-cuisine-fast-food-wallpaper-with-gastronomy-icons-brown-pastelle-sepia-color-texture-decorative-textile-wrapping-paper-design-bright-background-for-menu-receipts-vector.jpg')",
+        'image-banner': "url('./src/assets/image/banner.jpg')"
       }
     },
   },
