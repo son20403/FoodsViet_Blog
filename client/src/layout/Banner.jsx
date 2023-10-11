@@ -2,18 +2,17 @@ import React from 'react';
 
 const Banner = () => {
     return (
-        <div className='w-full h-full relative'>
-            <img src="./src/assets/image/banner5.png" alt="" />
-            {/* <div className='absolute inset-0'>
-                <div className=' px-[30%] md:px-[32%] text-center pt-[2%] md:pt-[10%] text-white leading-[1] 
-                lg:leading-[1]'>
-                    <h1 className='font-logo text-[3rem] md:text-[5rem] lg:text-[8rem] font-bold text-primary'>FOODS</h1>
-                    <h1 className='font-logo text-[3rem] md:text-[5rem] lg:text-[7rem] text-end '>VIET</h1>
-                    <h2 className='text-center font-light text-xs md:text-base mt-[10%] md:mt-5 leading-[2] lg:text-xl lg:mt-14'>
-                        &quot;Ẩm thực Việt Nam - Kết nối truyền thống và hiện đại qua từng hương vị độc đáo, mỗi món ăn là một câu chuyện văn hóa đầy màu sắc&quot;
-                    </h2>
+        <div className='w-full h-full relative '>
+            <div className='absolute inset-0 bg-black bg-opacity-70 flex justify-center items-center'>
+                <div className='flex flex-col items-center text-white gap-y-5 md:gap-y-10 lg:gap-y-20 '>
+                    <h1 className='text-2xl md:text-7xl lg:text-8xl font-bold font-logo '>FOODSVIET</h1>
+                    <p className='text-xl md:text-5xl lg:text-6xl'
+                        style={{ fontFamily: `Dancing Script, cursive` }}>
+                        Ẩm Thực Việt - Trải Nghiệm Việt</p>
+                    <span className='text-xs md:text-base lg:text-xl'>@FoodsViet</span>
                 </div>
-            </div> */}
+            </div>
+            <img src="./src/assets/image/banner-home.jpg" alt="" />
         </div>
     );
 };

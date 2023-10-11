@@ -25,7 +25,6 @@ class AuthController extends BaseController {
         }
     }
     logout = (req, res) => {
-        // Xóa cookie bằng cách đặt thời gian hết hạn ở quá khứ
         res.cookie('refreshToken', '', {
             expires: new Date(0),
             httpOnly: true,
@@ -33,7 +32,7 @@ class AuthController extends BaseController {
             path: '/',
             sameSite: 'strict'
         });
-        res.status(200).json({ message: 'Logged out successfully' });
+        res.status(200).json({ message: 'Đăng xuất thành công' });
     }
 
 }

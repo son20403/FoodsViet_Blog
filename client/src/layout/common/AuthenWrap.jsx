@@ -13,11 +13,11 @@ const AuthenWrap = ({ children, isSignIn = false, heading }) => {
                 </div>
                 <div className={`absolute w-[800px] pb-20 object-cover bottom-0 left-1/2 -translate-x-2/4 
                     rounded-tl-full rounded-tr-full 
-                    bg-opacity-50 shadow-2xl bg-white bg-theme bg-[length:900px_900px] z-20 pt-28 px-10
+                    bg-opacity-50 bg-white bg-[length:900px_900px] z-20 pt-28 px-10
                     md:w-[70%] md:h-min md:rounded-3xl md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-2/4
                     md:px-16 md:py-10
                     lg:w-[45%]  lg:px-10 lg:py-10 
-                    ${isSignIn ? "lg:-left-1/4 lg:translate-x-2/3 " : "lg:left-1/2 lg:translate-x-0"}`}>
+                    ${isSignIn ? "lg:left-1/2 lg:-translate-x-2/4 " : "lg:left-1/2 lg:-translate-x-2/4"}`}>
                     {children}
                 </div>
             </div>

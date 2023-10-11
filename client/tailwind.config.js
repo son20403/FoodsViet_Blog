@@ -48,6 +48,8 @@ export default withMT({
           margin: '0 auto',
         },
       })
-    })
+    }),
+    // eslint-disable-next-line no-undef
+    require('@tailwindcss/line-clamp')
   ],
 })

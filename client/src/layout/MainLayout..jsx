@@ -9,12 +9,12 @@ import { postsRequest } from '../sagas/posts/postsSlice';
 import { categoriesRequest } from '../sagas/categories/categoriesSlice';
 import { customersRequest } from '../sagas/customers/customersSlice';
 import { commentsRequest, setNotify } from '../sagas/comments/commentsSlice';
+import { setErrorGlobal, setNotifyGlobal } from '../sagas/global/globalSlice';
 
 function MainLayout() {
     const dispatch = useDispatch()
     const location = useLocation();
     const { token } = useSelector((state) => state.auth);
-    const { error } = useSelector((state) => state.posts);
     const tokenLocal = localStorage.getItem('authToken')
     useEffect(() => {
         dispatch(postsRequest(token || tokenLocal))
@@ -22,6 +22,8 @@ function MainLayout() {
         dispatch(customersRequest(token || tokenLocal))
         dispatch(commentsRequest(token || tokenLocal))
         dispatch(setNotify())
+        dispatch(setErrorGlobal(''))
+        dispatch(setNotifyGlobal(''))
     }, [token, dispatch, tokenLocal, location.pathname]);
     return (
         <div className='relative min-h-[1000px] max-w-[1600px] m-auto flex flex-col '>

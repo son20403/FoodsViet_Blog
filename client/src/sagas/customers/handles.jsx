@@ -2,6 +2,7 @@ import { call, put } from "redux-saga/effects";
 import { toast } from "react-toastify";
 import { getAllCustomers, getDetailCustomer } from "./request";
 import { customerDetailSuccess, customersSuccess, requestFailure } from "./customersSlice";
+import { setErrorGlobal } from "../global/globalSlice";
 
 export function* handleGetDetailCustomer({ payload }) {
     try {
@@ -23,8 +24,10 @@ export function* handleGetAllCustomers({ payload }) {
     } catch (error) {
         if (error?.code === 'ERR_NETWORK') {
             yield put(requestFailure(error));
+            yield put(setErrorGlobal(error?.message));
         } else {
             yield put(requestFailure(error?.response?.data));
+            yield put(setErrorGlobal(error?.response?.data?.message));
         }
     }
 }

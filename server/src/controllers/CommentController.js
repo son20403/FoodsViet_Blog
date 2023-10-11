@@ -9,7 +9,6 @@ class CommentController extends BaseController {
     create = async (req, res) => {
         const id_customer = req.customer.id;
         const comment = req.body
-        console.log("🚀 ~ file: CommentController.js:12 ~ CommentController ~ create= ~ comment:", comment)
         try {
             if (comment) {
                 const modelComment = {

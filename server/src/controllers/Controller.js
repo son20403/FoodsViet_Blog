@@ -30,7 +30,7 @@ class BaseController {
                 throw new Error("Có lỗi xảy ra");
             }
             return res.status(200).json({
-                message: "Tạo tài khoản thành công",
+                message: "Đăng ký tài khoản thành công",
             });
         } catch (error) {
             if (fileData) cloudinary.uploader.destroy(id_image);
@@ -71,8 +71,7 @@ class BaseController {
                     path: '/',
                     sameSite: 'strict'
                 })
-                const { password, id_image, updatedAt, createdAt, ...others } = user._doc;
-                return res.status(200).json({ ...others, accessToken });
+                return res.status(200).json({ accessToken, message: 'Đăng nhập thành công' });
             }
         } catch (error) {
             console.log("error: ", error);

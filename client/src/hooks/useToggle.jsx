@@ -5,5 +5,11 @@ export default function useToggle(initialState = false) {
     const handleToggle = () => {
         setToggle(!toggle)
     }
-    return { toggle, handleToggle }
+    const handleToggleFalse = () => {
+        setToggle(false)
+    }
+    const handleToggleTrue = () => {
+        setToggle(true)
+    }
+    return { toggle, handleToggle, handleToggleFalse, handleToggleTrue }
 }

@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Heading } from '../components/heading';
-import { InputSearch } from '../components/input';
 import Overlay from './common/Overlay';
+import { SearchIcon } from '../components/Icon';
+import { Button, Input } from '@material-tailwind/react';
+import { useSelector } from 'react-redux';
+import removeAccents from 'remove-accents';
+import { Link } from 'react-router-dom';
 
 const Search = ({ showSearch, handleShowSearch }) => {
+    // const [query, setQuery] = useState('');
+    const { posts } = useSelector((state) => state.posts)
+    const [listPostResults, setListPostResults] = useState([]);
+    const removeDiacritics = (str) => {
+        return removeAccents(str);
+    };
+    const handleOnChange = (e) => {
+        const value = e.target.value
+        const filteredPosts = posts.filter((post) =>
+            removeDiacritics(post.title.toLowerCase()).includes(removeDiacritics(value.toLowerCase()))
+        );
+        setListPostResults(filteredPosts);
+    }
     return (
         <>
             <Overlay show={showSearch} onClick={handleShowSearch}></Overlay>
-            <div className={`flex-1 absolute bg-white-cream bg-opacity-50 flex w-full justify-center gap-5 transition-all backdrop-blur
+            <div className={`flex-1 absolute bg-white-cream bg-opacity-90 flex w-full justify-center gap-5 
+            transition-all backdrop-blur text-black
                 left-0 flex-col px-5 py-5 text-sm z-[12] shadow-soft border-t border-primary bad
                 ${showSearch ? 'top-0' : 'invisible -top-[500px]'}`}
             >
@@ -17,28 +35,35 @@ const Search = ({ showSearch, handleShowSearch }) => {
                     <FontAwesomeIcon icon={faXmark} />
                 </div>
                 <div className='page-content'>
-                    <InputSearch></InputSearch>
+                    <Input variant="standard" label={'Nhập nội dung tìm kiếm'} onChange={handleOnChange} icon={<SearchIcon />}></Input>
                     <div className='flex flex-col'>
-                        <SearchItem></SearchItem>
-                        <SearchItem></SearchItem>
-                        <SearchItem></SearchItem>
-                        <SearchItem></SearchItem>
+                        {listPostResults.length > 0 ? listPostResults?.slice(0, 5).map((item) => (
+                            <SearchItem key={item._id} data={item}></SearchItem>
+                        )) : <span className='text-center my-4'>Không có dữ liệu</span>}
+                    </div>
+                    {listPostResults.length > 5 && (
+                        <div className=' flex w-full justify-center'>
+                            <Link className='text-xs text-primary px-2 py-1 border 
+                            max-w-[200px] border-primary'>Xem thêm</Link>
+                        </div>
+                    )}
+                    <div>Kết quả tìm kiếm: ({listPostResults.length})
                     </div>
                 </div>
             </div>
         </>
     );
 };
-const SearchItem = () => {
+const SearchItem = ({ data }) => {
     return (
         <div className='flex gap-3 items-center border-b py-5 last:border-b-0'>
             <div className=' w-14 h-14 overflow-hidden rounded-md'>
-                <img src="https://cdnimg.vietnamplus.vn/uploaded/ngtmbh/2019_12_19/battongnucuoicuabanvoicachlamtrangrangbangcacnguyenlieudongiantrangrangbangnuocgao021537172872880width600height450.jpg" alt=""
+                <img src={data?.image} alt=""
                     className='w-full h-full object-cover' />
             </div>
             <div className='flex-1'>
                 <Heading className='text-sm'>
-                    Phở Việt Nam - 1 trong những món ăn hấp dẫn nhất hành tinh</Heading>
+                    {data?.title}</Heading>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Logo from '../components/logo/Logo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -10,9 +10,10 @@ import Avatar from './customers/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleNavbar, toggleSearch, toggleSetting, closeNavbar, closeSearch, closeSetting } from '../sagas/global/globalSlice';
 import { useLocation } from 'react-router-dom';
+import { SearchIcon } from '../components/Icon';
 
 const Header = () => {
-
+    const location = useLocation();
     const dispatch = useDispatch()
     const { showSearch, showSetting, showNavbar } = useSelector((state) => state.global)
     const handleShowNavbar = () => {
@@ -30,15 +31,25 @@ const Header = () => {
         dispatch(closeNavbar())
         dispatch(closeSearch())
     }
-    const location = useLocation();
-
     useEffect(() => {
         dispatch(closeNavbar())
         dispatch(closeSearch())
         dispatch(closeSetting())
     }, [location.pathname, dispatch]);
+
+    const [isScroll, setIsScroll] = useState(false);
+    useEffect(() => {
+        const handleScrollbar = () => {
+            setIsScroll(window.scrollY >= 150);
+        }
+        window.addEventListener('scroll', handleScrollbar)
+        return () => {
+            window.removeEventListener('scroll', handleScrollbar)
+        }
+    }, []);
     return (
-        <div className='border-b border-b-primary md:border-b-0 lg:fixed top-0 left-0 right-0 z-[10] bg-white bg-opacity-70'>
+        <div className={`fixed  top-0 left-0 right-0 z-[10]
+        ${isScroll ? 'bg-white text-black' : 'md:text-white'}`}>
             <Search showSearch={showSearch} handleShowSearch={handleShowSearch}></Search>
             <div className='page-content relative px-2 md:px-3 lg:px-2 flex items-center py-2 justify-between'>
                 <div className='z-[10]'>
@@ -46,13 +57,16 @@ const Header = () => {
                 </div>
                 <Navbar handleShowNavbar={handleShowNavbar} showNavbar={showNavbar}></Navbar>
                 <Setting show={showSetting} onClick={handleShowSetting}></Setting>
-                <div className='flex items-center gap-7 md:gap-10  z-[10]'>
-                    <span className='text-xl font-thin' onClick={handleShowSearch}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                <div className='flex items-center gap-7  z-[10]'>
+                    <span className={`text-2xl  font-thin flex justify-center items-center cursor-pointer
+                     ${isScroll ? '!text-black ' : '!text-white'}`}
+                        onClick={handleShowSearch}>
+                        <SearchIcon />
                     </span>
                     <Avatar onClick={handleShowSetting}></Avatar>
                     <div className='md:hidden' onClick={handleShowNavbar}>
-                        <FontAwesomeIcon className={`${showNavbar ? 'text-2xl' : 'text-xl'}`}
+                        <FontAwesomeIcon className={` ${showNavbar ? 'text-2xl' : 'text-xl'} 
+                        ${isScroll ? '!text-black ' : '!text-white'}`}
                             icon={showNavbar ? faXmark : faBars} />
                     </div>
                 </div>

@@ -12,12 +12,14 @@ import HeartIcon from "./HeartIcon";
 import InstagramIcon from "./InstagramIcon";
 import LocationIcon from "./LocationIcon";
 import LockIcon from "./LockIcon";
+import SearchIcon from "./SearchIcon";
 import StarIcon from "./StarIcon";
 import TrashIcon from "./TrashIcon";
 import TwitterIcon from "./TwitterIcon";
 import UserIcon from "./UserIcon";
 import YoutuberIcon from "./YoutuberIcon";
 export {
+    SearchIcon,
     ArrowNextIcon,
     BookmarkIcon,
     TrashIcon,

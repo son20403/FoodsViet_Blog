@@ -1,3 +1,6 @@
 import Button from "./Button";
-
-export { Button }
+import ButtonComment from "./ButtonComment";
+export {
+    ButtonComment,
+    Button
+}

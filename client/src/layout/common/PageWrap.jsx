@@ -2,7 +2,7 @@ import React from 'react';
 
 const PageWrap = ({ children }) => {
     return (
-        <div className='mt-[50px]'>
+        <div className='md:mt-[50px]'>
             {children}
         </div>
     );

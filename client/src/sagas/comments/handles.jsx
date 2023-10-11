@@ -1,6 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { getAllComments, postComments } from "./request";
 import { getCommentsSuccess, postCommentsSuccess, requestFailure } from "./commentsSlice";
+import { setNotifyGlobal } from "../global/globalSlice";
 
 export function* handleGetAllComments({ payload }) {
     try {
@@ -18,15 +19,20 @@ export function* handleGetAllComments({ payload }) {
 }
 export function* handlePostComments({ payload }) {
     try {
+        yield put(setNotifyGlobal(''))
         const response = yield call(postComments, payload?.token, payload.comment);
         if (response) {
             yield put(postCommentsSuccess(response.data.message))
+            yield put(setNotifyGlobal(response.data?.message))
+
         }
     } catch (error) {
         if (error?.code === 'ERR_NETWORK') {
             yield put(requestFailure(error));
         } else {
             yield put(requestFailure(error?.response?.data));
+            yield put(setNotifyGlobal(''))
+
         }
     }
 }

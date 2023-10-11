@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     showNavbar: false,
     showSetting: false,
-    showSearch: false
+    showSearch: false,
+    errorGlobal: '',
+    notifyGlobal: ''
 }
 export const globalSlice = createSlice({
     name: "global",
@@ -45,8 +47,20 @@ export const globalSlice = createSlice({
                 showSearch: false
             }
         },
+        setErrorGlobal: (state, action) => {
+            return {
+                ...state,
+                errorGlobal: action.payload
+            }
+        },
+        setNotifyGlobal: (state, action) => {
+            return {
+                ...state,
+                notifyGlobal: action.payload
+            }
+        }
     }
 })
 
-export const { toggleNavbar, toggleSearch, toggleSetting, closeNavbar, closeSearch, closeSetting } = globalSlice.actions;
+export const { toggleNavbar, toggleSearch, toggleSetting, closeNavbar, closeSearch, closeSetting, setErrorGlobal, setNotifyGlobal } = globalSlice.actions;
 export default globalSlice.reducer

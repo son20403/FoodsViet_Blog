@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -27,6 +28,7 @@
         font-family: 'Roboto', sans-serif;
         font-family: 'Open Sans', sans-serif;
         font-family: 'Sora', sans-serif;
+        font-family: 'Dancing Script', cursive;
         */
     }
 
@@ -42,6 +44,30 @@
     .content_post h6,
     .content_post strong {
         @apply !font-heading;
+    }
+
+    .content_post.post_item h1,
+    .content_post.post_item div,
+    .content_post.post_item span,
+    .content_post.post_item em,
+    .content_post.post_item b,
+    .content_post.post_item a,
+    .content_post.post_item h2,
+    .content_post.post_item h3,
+    .content_post.post_item h4,
+    .content_post.post_item h5,
+    .content_post.post_item h6,
+    .content_post.post_item p,
+    .content_post.post_item strong {
+        @apply !font-normal !font-body !text-sm !text-gray-500 !m-0;
+    }
+
+    .content_post.post_item img {
+        @apply !hidden;
+    }
+
+    .content_post.post_item {
+        @apply !mt-0
     }
 }
 
@@ -68,7 +94,6 @@
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 20px !important;
-    /* Đặt font-weight thích hợp cho biểu tượng dựa trên Font Awesome 5 */
     color: #fff;
 }
 
@@ -97,27 +122,6 @@
 
 /* customs post_item */
 
-.post_item:first-child {
-    margin-bottom: 20px;
-}
-
-.post_item:first-child .post_item-img {
-    height: 100%;
-}
-
-.post_item:first-child .post_item-icon {
-    color: #fff;
-
-}
-
-
-.post_item:first-child .post_item-content {
-    position: absolute;
-    background-image: linear-gradient(to top, black -30%, transparent 140%);
-    inset: 0px;
-    display: flex;
-    color: #fff;
-}
 
 .textarea_custom .isErr {
     border: 0.1px solid red !important;
@@ -145,7 +149,6 @@
     width: auto !important;
     height: auto !important;
     max-width: 100% !important;
-    max-height: 100% !important;
     max-height: 100% !important;
     display: block !important;
     object-fit: contain !important;

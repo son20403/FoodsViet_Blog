@@ -4,6 +4,9 @@ import ListCategory from '../layout/categories/ListCategory';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import PageWrap from '../layout/common/PageWrap';
+import Section from '../layout/common/Section';
+import Banner from '../layout/Banner';
+import BannerCommon from '../layout/common/BannerCommon';
 
 const CategoryPage = () => {
     const { categories, error } = useSelector((state) => state.categories);
@@ -11,14 +14,16 @@ const CategoryPage = () => {
         if (error) toast.error(error.message)
     }, [error]);
     return (
-        <PageWrap>
+        <>
+            <Section className='mb-10'>
+                <BannerCommon image={'./src/assets/image/banner-category.jpg'} title={'Danh mục bài viết'} />
+            </Section>
             <div className='page-content min-h-screen'>
-                <Heading isHeading className='my-10 mx-2'>Categories</Heading>
                 <div className='mb-10'>
                     <ListCategory data={categories}></ListCategory>
                 </div>
             </div>
-        </PageWrap>
+        </>
     );
 };
 

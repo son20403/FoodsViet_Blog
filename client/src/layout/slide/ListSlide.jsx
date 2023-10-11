@@ -13,7 +13,7 @@ const ListSlide = ({ data = [], className }) => {
                 {
                     data.length > 0 ? data.map((item) => (
                         <SwiperSlide key={item._id}>
-                            <ItemImage image={item.image} title={item.title}></ItemImage>
+                            <ItemImage className={className} data={item}></ItemImage>
                         </SwiperSlide>
                     )) : arr.map((item, index) => (
                         <SwiperSlide key={index}>

@@ -14,7 +14,7 @@ const Setting = ({ show, onClick }) => {
     return (
         <>
             <Overlay show={show} onClick={onClick}></Overlay>
-            <div className={`flex-1 absolute bg-white-cream flex top-full w-full justify-center gap-5 transition-all
+            <div className={`flex-1 absolute text-black bg-white-cream flex top-full w-full justify-center gap-5 transition-all
                 flex-col px-5 py-5 text-sm z-[10] right-0 shadow-soft border-t border-primary 
                 md:max-w-[200px] lg:text-center
                 ${show ? 'top-full' : 'invisible opacity-0'}`}>

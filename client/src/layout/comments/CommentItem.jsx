@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useTimeSince from '../../hooks/useTimeSince';
 import { getDate, getTimestamp } from '../../hooks/useGetTime';
 import { commentsRequest, postCommentsRequest } from '../../sagas/comments/commentsSlice';
+import { ButtonComment } from '../../components/button';
 
 const schemaValidateReply = Yup.object({
     content: Yup.string().required("Vui lòng nhập bình luận!")
@@ -96,12 +97,7 @@ const CommentItem = ({ comment, replies = () => { }, countR = 0, id_post }) => {
                                             <CommentIcon></CommentIcon>
                                         </Input>
                                     </div>
-                                    <button type='submit' className='px-3 mx-2 py-3 border-2 border-opacity-60
-                                rounded-xl border-primary'>
-                                        <IconWrap className='text-2xl text-primary'>
-                                            <ArrowNextIcon></ArrowNextIcon>
-                                        </IconWrap>
-                                    </button>
+                                    <ButtonComment isLoading={isSubmittingReply} />
                                 </form>
                             </div>
 
@@ -117,12 +113,7 @@ const CommentItem = ({ comment, replies = () => { }, countR = 0, id_post }) => {
                                             <CommentIcon></CommentIcon>
                                         </Input>
                                     </div>
-                                    <button type='submit' className='px-3 mx-2 py-3 border-2 border-opacity-60
-                                        rounded-xl border-primary'>
-                                        <IconWrap className='text-2xl text-primary'>
-                                            <ArrowNextIcon></ArrowNextIcon>
-                                        </IconWrap>
-                                    </button>
+                                    <ButtonComment isLoading={isSubmittingEditComment} />
                                 </form>
                             </div>
                         </div></div>

@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 
 const PostItemSidebar = ({ data = {} }) => {
     return (
-        <Link to={`/detail/${data?.slug}`} className=' flex gap-5 items-center border rounded-sm shadow-soft pr-2 overflow-hidden'>
+        <Link to={`/detail/${data?.slug}`} className=' 
+        flex gap-3 md:gap-5 items-center border rounded-sm shadow-soft pr-2 overflow-hidden'>
             <div className='w-24 h-24 overflow-hidden'>
                 <img src={data.image}
                     alt="" className=' w-full h-full object-cover' />
             </div>
             <div className='flex-1'>
-                <Heading className='text-[13px] md:text-sm font-medium'>{data.title}</Heading>
+                <Heading className='text-[13px] uppercase leading-[1.5] md:text-xs font-medium'>{data.title}</Heading>
             </div>
         </Link>
     );
