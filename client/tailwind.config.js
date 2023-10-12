@@ -20,6 +20,8 @@ export default withMT({
       fontFamily: {
         'logo': ['Sora', 'ui-sans-serif', 'system-ui'],
         'heading': ['Fira Sans', 'ui-sans-serif', 'system-ui'],
+        'content': ['Quicksand', 'ui-sans-serif', 'system-ui'],
+        'quicksand': ['Quicksand', 'ui-sans-serif', 'system-ui'],
       },
 
       boxShadow: {

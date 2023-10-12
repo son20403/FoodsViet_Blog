@@ -36,7 +36,7 @@ const SignIn = () => {
     }
     return (
         <>
-            <form onSubmit={handleSubmit(handleSignIn)} className="sign-in-form">
+            <form onSubmit={handleSubmit(handleSignIn)} className="sign-in-form form_signin-signup">
                 <h2 className="title">Đăng nhập</h2>
                 <div className='flex flex-col gap-6 m-auto w-full bg-white' >
                     <Input control={control} type='text' name={'user_name'} errors={errors} placeholder='Tài khoản'

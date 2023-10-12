@@ -71,7 +71,8 @@ class BaseController {
                     path: '/',
                     sameSite: 'strict'
                 })
-                return res.status(200).json({ accessToken, message: 'Đăng nhập thành công' });
+                const { password, id_image, updatedAt, createdAt, ...others } = user._doc;
+                return res.status(200).json({ ...others, accessToken, message: 'Đăng nhập thành công' });
             }
         } catch (error) {
             console.log("error: ", error);

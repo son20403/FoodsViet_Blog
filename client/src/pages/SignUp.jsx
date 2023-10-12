@@ -43,7 +43,7 @@ const SignUp = ({ onClick = () => { } }) => {
     }, [error]);
     return (
         <>
-            <form onSubmit={handleSubmit(handleSignUp)} className="sign-up-form">
+            <form onSubmit={handleSubmit(handleSignUp)} className="sign-up-form form_signin-signup">
                 <h2 className="title">Đăng Ký</h2>
                 <div className='flex flex-col gap-4 w-full bg-white' >
                     <Input control={control} type='text' name={'user_name'} errors={errors} placeholder='Tài khoản'

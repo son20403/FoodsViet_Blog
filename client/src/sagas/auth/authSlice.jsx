@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getObjectFromLocalStorage, removeObjectFromLocalStorage, saveObjectToLocalStorage } from "../../utils/localstorage";
 
 const initialState = {
-    token: localStorage.getItem('authToken'),
+    token: getObjectFromLocalStorage('authToken') || null,
+    infoAuth: getObjectFromLocalStorage('infoAuth') || null,
     isAuthenticated: !!localStorage.getItem('authToken'),
     loading: false,
     error: null,
@@ -19,7 +21,7 @@ const authSlice = createSlice({
             }
         },
         loginSuccess: (state, action) => {
-            localStorage.setItem('authToken', action.payload)
+            saveObjectToLocalStorage('authToken', action.payload)
             return {
                 ...state,
                 token: action.payload,
@@ -29,11 +31,13 @@ const authSlice = createSlice({
             }
         },
         logout: (state) => {
-            localStorage.removeItem('authToken')
+            removeObjectFromLocalStorage('authToken');
+            removeObjectFromLocalStorage('infoAuth');
             return {
                 ...state,
                 isAuthenticated: false,
                 token: null,
+                infoAuth: null
             }
         },
         registerRequest: (state, action) => {
@@ -63,7 +67,7 @@ const authSlice = createSlice({
             }
         },
         refreshAccessTokenSuccess: (state, action) => {
-            localStorage.setItem('authToken', action.payload)
+            saveObjectToLocalStorage('authToken', action.payload)
             return {
                 ...state,
                 token: action.payload,
@@ -72,8 +76,15 @@ const authSlice = createSlice({
                 error: null,
             }
         },
+        setInfoAuth: (state, action) => {
+            saveObjectToLocalStorage('infoAuth', action.payload)
+            return {
+                ...state,
+                infoAuth: action.payload
+            }
+        },
     }
 })
 
-export const { loginRequest, loginSuccess, logout, registerRequest, requestFailure, registerSuccess, refreshAccessTokenRequest, refreshAccessTokenSuccess } = authSlice.actions
+export const { loginRequest, loginSuccess, logout, registerRequest, requestFailure, registerSuccess, refreshAccessTokenRequest, refreshAccessTokenSuccess, setInfoAuth } = authSlice.actions
 export default authSlice.reducer

@@ -25,23 +25,16 @@ function App() {
   return (
     <div>
       <Routes>
-        {token ?
-          (<>
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="/categories" element={<CategoryPage />} />
-              <Route path="/info" element={<InfoUser />} />
-              <Route path="/detail/:slug" element={<DetailPage />} />
-              <Route path="/posts" element={<PostPage />} />
-              <Route path="/add-post" element={<AddNewPosts />} />
-            </Route>
-          </>) :
-          (<>
-            <Route path="/signin" element={<SignInSignUp />} />
-            <Route path="/signup" element={<SignUp />} />
-          </>)
-        }
-        {token && <Route path="*" element={<Navigate to="/" />} />}
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/categories" element={<CategoryPage />} />
+          <Route path="/info/:slug" element={<InfoUser />} />
+          <Route path="/detail/:slug" element={<DetailPage />} />
+          <Route path="/posts" element={<PostPage />} />
+          <Route path="/add-post" element={<AddNewPosts />} />
+        </Route>
+        <Route path="/signin" element={<SignInSignUp />} />
+        <Route path="/signup" element={<SignUp />} />
         {!token && <Route path="*" element={<Navigate to="/signin" />} />}
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>

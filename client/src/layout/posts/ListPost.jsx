@@ -16,15 +16,22 @@ function ListItem({ data = {}, isSingle }) {
         </ScrollTrigger>
     );
 }
-const ListPost = ({ data = [] }) => {
+const ListPost = ({ data = [], className = '', message = '' }) => {
     const arr = Array(6).fill(null)
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-5 col-span-2 mx-2 lg:mx-0'>
-            {data.length > 0 ? data?.map((item) => (
-                <PostItem key={item._id} data={item} isSingle ></PostItem>
-            )) : arr.map((item, index) => (
-                <PostItemSketeton key={index}></PostItemSketeton>
-            ))
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-5 col-span-2 mx-2 lg:mx-0
+        ${className}
+        `}>
+
+            {data.length > 0
+                ? data?.map((item) => (
+                    <PostItem key={item._id} data={item} isSingle ></PostItem>
+                ))
+                : data.length < 1 && message
+                    ? message
+                    : arr.map((item, index) => (
+                        <PostItemSketeton key={index}></PostItemSketeton>
+                    ))
             }
         </div>
     );

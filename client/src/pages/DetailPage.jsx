@@ -59,11 +59,11 @@ const DetailPage = () => {
     const [dataDetailPost, setDataDetailPost] = useState({});
 
     const detailPost = posts.filter((post) => post?.slug === slug);
-    const dataCategory = categories.filter((cate) => cate._id === dataDetailPost?.category)
+    const dataCategory = categories.filter((cate) => cate._id === dataDetailPost?.category)[0]
     const postByCategories = posts.filter((post) => post?.category === dataDetailPost?.category)
         .filter((post) => post?.slug !== slug);
     const commentByPosts = comments.filter((comment) => comment?.id_post === dataDetailPost?._id).reverse();
-    const customerByPosts = customers.filter((customer) => customer?._id === dataDetailPost?.id_customer);
+    const customerByPosts = customers.filter((customer) => customer?._id === dataDetailPost?.id_customer)[0];
     const postByCustomer = posts.filter((post) => post?.id_customer === dataDetailPost?.id_customer);
 
     const rootComment = commentByPosts?.filter(comment => comment?.parent_comment_id === '')
@@ -88,9 +88,9 @@ const DetailPage = () => {
                             {dataDetailPost?.title}
                         </Heading>
                         <div className='text-white text-xs md:text-sm lg:text-base uppercase opacity-80  mt-10 flex '>
-                            <div className='px-2 border-r last:border-none'>{customerByPosts[0]?.full_name}</div>
+                            <div className='px-2 border-r last:border-none'>{customerByPosts?.full_name}</div>
                             <div className='px-2 border-r last:border-none'>{dataDetailPost?.date} </div>
-                            <div className='px-2 border-r last:border-none'>{dataCategory[0]?.title}</div></div>
+                            <div className='px-2 border-r last:border-none'>{dataCategory?.title}</div></div>
                     </div>
                 </div>
             </div>
@@ -100,8 +100,8 @@ const DetailPage = () => {
                         <div className='flex  gap-x-5 md:gap-x-10 gap-y-3 items-center justify-between md:justify-normal
                             !text-xs my-5 '>
                             <div className='flex gap-3 items-center'>
-                                <Avatar image={customerByPosts[0]?.image}></Avatar>
-                                <h2 className='text-xs md:text-sm font-medium'>{customerByPosts[0]?.full_name}</h2>
+                                <Avatar image={customerByPosts?.image}></Avatar>
+                                <h2 className='text-xs md:text-sm font-medium'>{customerByPosts?.full_name}</h2>
                             </div>
                             <div>
                                 <DataPost timestamps={dataDetailPost?.timestamps}

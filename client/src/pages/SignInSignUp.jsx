@@ -5,12 +5,14 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const SignInSignUp = () => {
+    const navigate = useNavigate();
+    const { token } = useSelector((state) => state.auth);
     const { handleToggle, toggle, handleToggleFalse, handleToggleTrue } = useToggle(false);
-    const { error } = useSelector((state) => state.auth);
-    // useEffect(() => {
-    //     if (error) toast.error(error.message)
-    // }, [error]);
+    useEffect(() => {
+        if (token) navigate('/')
+    }, [token]);
     return (
         <div className={`container-main ${toggle ? 'sign-up-mode' : ''} select-none`}>
             <div className="forms-container">

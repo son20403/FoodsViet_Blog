@@ -1,5 +1,5 @@
 // MainLayout.jsx
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +25,10 @@ function MainLayout() {
         dispatch(setErrorGlobal(''))
         dispatch(setNotifyGlobal(''))
     }, [token, dispatch, tokenLocal, location.pathname]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!token) navigate('/signin')
+    }, [token]);
     return (
         <div className='relative min-h-[1000px] max-w-[1600px] m-auto flex flex-col '>
             <Header />

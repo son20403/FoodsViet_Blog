@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import { loginAuth, logoutAuth, registerAuth } from "./request";
-import { requestFailure, loginSuccess, registerSuccess } from "./authSlice";
+import { requestFailure, loginSuccess, registerSuccess, setInfoAuth } from "./authSlice";
 import { setErrorGlobal, setNotifyGlobal } from "../global/globalSlice";
 
 export function* authenticateCustomer({ payload }) {
@@ -8,8 +8,11 @@ export function* authenticateCustomer({ payload }) {
         yield put(setErrorGlobal(''));
         const response = yield call(loginAuth, payload);
         if (response) {
-            yield put(setNotifyGlobal(response.data?.message))
-            yield put(loginSuccess(response.data?.accessToken))
+            const { message, accessToken, ...info } = response.data
+            console.log("🚀 ~ file: handles.jsx:12 ~ function*authenticateCustomer ~ info:", info)
+            yield put(setNotifyGlobal(message))
+            yield put(loginSuccess(accessToken))
+            yield put(setInfoAuth(info))
         }
     } catch (error) {
         if (error?.code === 'ERR_NETWORK') {

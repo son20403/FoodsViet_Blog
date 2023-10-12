@@ -1,10 +1,9 @@
 import Skeleton from "react-loading-skeleton"
 
-const PostItemSketeton = ({ isHome }) => {
+const PostItemSketeton = () => {
 
     return (
-        <div className={`overflow-hidden border shadow-soft rounded-xl grid grid-rows-2 relative h-full
-        ${isHome ? ' first:col-span-2 lg:first:shadow-transparent group' : ''}`}>
+        <div className={`overflow-hidden border shadow-soft rounded-xl grid grid-rows-2 relative h-full`}>
             <div
                 className=' w-full group-first:h-[200px] h-[160px] md:h-[200px] flex-1 overflow-hidden'>
                 <Skeleton className='w-full h-full !block' />
