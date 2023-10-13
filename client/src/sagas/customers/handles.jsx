@@ -1,8 +1,7 @@
-import { call, put } from "redux-saga/effects";
-import { toast } from "react-toastify";
-import { getAllCustomers, getDetailCustomer } from "./request";
-import { customerDetailSuccess, customersSuccess, requestFailure } from "./customersSlice";
-import { setErrorGlobal } from "../global/globalSlice";
+import { call, delay, put, race } from "redux-saga/effects";
+import { getAllCustomers, getDetailCustomer, updateCustomer } from "./request";
+import { customerDetailSuccess, customersRequest, customersSuccess, requestFailure, setLoadingCustomer, updateCustomerSuccess } from "./customersSlice";
+import { setErrorGlobal, setNotifyGlobal } from "../global/globalSlice";
 
 export function* handleGetDetailCustomer({ payload }) {
     try {
@@ -11,7 +10,7 @@ export function* handleGetDetailCustomer({ payload }) {
             yield put(customerDetailSuccess(response.data))
         }
     } catch (error) {
-        yield put(requestFailure(error.response.data.message));
+        handleCommonError(error)
     }
 }
 
@@ -22,12 +21,51 @@ export function* handleGetAllCustomers({ payload }) {
             yield put(customersSuccess(response.data))
         }
     } catch (error) {
-        if (error?.code === 'ERR_NETWORK') {
-            yield put(requestFailure(error));
-            yield put(setErrorGlobal(error?.message));
-        } else {
-            yield put(requestFailure(error?.response?.data));
-            yield put(setErrorGlobal(error?.response?.data?.message));
+        handleCommonError(error)
+    }
+}
+
+export function* handleUpdateCustomers({ payload }) {
+    try {
+        yield put(setLoadingCustomer(true))
+
+        const { response, timeout } = yield race({
+            response: call(updateCustomer, payload?.token, payload?.info),
+            timeout: delay(15000), // Chờ 5 giây, bạn có thể thay đổi thời gian tùy ý
+        });
+
+        if (timeout) {
+            yield put(setErrorGlobal('Quá thời gian'));
+            yield put(setLoadingCustomer(false))
+            return;
         }
+
+        if (response) {
+            try {
+                yield put(customersRequest(payload?.token));
+            } catch (error) {
+                handleCommonError(error)
+            }
+
+            try {
+                yield put(setNotifyGlobal(response.data?.message));
+            } catch (error) {
+                handleCommonError(error)
+            }
+            yield put(setLoadingCustomer(false))
+        }
+    } catch (error) {
+        handleCommonError(error)
+    }
+}
+
+function* handleCommonError(error) {
+    console.log("error:", error)
+    if (error?.code === 'ERR_NETWORK') {
+        yield put(requestFailure(error));
+        yield put(setErrorGlobal(error?.message));
+    } else {
+        yield put(requestFailure(error?.response?.data));
+        yield put(setErrorGlobal(error?.response?.data?.message));
     }
 }

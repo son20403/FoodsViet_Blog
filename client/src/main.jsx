@@ -10,13 +10,14 @@ import store from './sagas/configureStore'
 import { ThemeProvider } from '@material-tailwind/react'
 import App from './App'
 import ScrollToTop from './layout/common/ScrollToTop'
+import LoadingPage from './layout/loading/LoadingPage'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <BrowserRouter>
       <ScrollToTop />
       <Provider store={store}>
         <ThemeProvider>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingPage></LoadingPage>}>
             <App />
           </Suspense>
         </ThemeProvider>

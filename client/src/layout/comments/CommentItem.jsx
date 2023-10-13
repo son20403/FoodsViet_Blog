@@ -43,9 +43,7 @@ const CommentItem = ({ comment, replies = () => { }, countR = 0, id_post }) => {
             parent_comment_id: comment._id
         }
         dispatch(postCommentsRequest({ token, comment: comments }))
-        dispatch(commentsRequest(token))
         setShowReply(false)
-
     }
 
     // EDIT COMMENT

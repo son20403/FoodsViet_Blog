@@ -1,0 +1,36 @@
+/* modal zoom */
+
+.zoom-enter .content {
+    opacity: 0;
+    transform: translateX(-100%)
+}
+
+.zoom-enter-active .content {
+    opacity: 1;
+    transform: translateX(0)
+}
+
+.zoom-exit .content {
+    opacity: 1;
+}
+
+.zoom-exit-active .content {
+    opacity: 0;
+    transform: translateX(-100%)
+}
+
+.zoom-enter .overlay {
+    opacity: 0;
+}
+
+.zoom-enter-active .overlay {
+    opacity: 1;
+}
+
+.zoom-exit .overlay {
+    opacity: 1;
+}
+
+.zoom-exit-active .overlay {
+    opacity: 0;
+}

@@ -4,6 +4,7 @@ const initialState = {
     showNavbar: false,
     showSetting: false,
     showSearch: false,
+    isRequest: false,
     errorGlobal: '',
     notifyGlobal: ''
 }
@@ -58,9 +59,15 @@ export const globalSlice = createSlice({
                 ...state,
                 notifyGlobal: action.payload
             }
+        },
+        setRequest: (state, action) => {
+            return {
+                ...state,
+                isRequest: action.payload
+            }
         }
     }
 })
 
-export const { toggleNavbar, toggleSearch, toggleSetting, closeNavbar, closeSearch, closeSetting, setErrorGlobal, setNotifyGlobal } = globalSlice.actions;
+export const { toggleNavbar, toggleSearch, toggleSetting, closeNavbar, closeSearch, closeSetting, setErrorGlobal, setNotifyGlobal, setRequest } = globalSlice.actions;
 export default globalSlice.reducer

@@ -5,7 +5,7 @@ const NotFound404 = () => {
         <div>
             <div className=''>
                 <div className="h-screen w-full flex justify-center items-center bg-[#1A2238] flex-col">
-                    <img src="../src/assets/log.svg" alt="" />
+                    {/* <img src="../src/assets/log.svg" alt="" /> */}
                     <h1 className="font-extrabold text-9xl text-white tracking-wide">
                         404
                     </h1>

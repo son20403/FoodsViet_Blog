@@ -22,6 +22,7 @@ export default withMT({
         'heading': ['Fira Sans', 'ui-sans-serif', 'system-ui'],
         'content': ['Quicksand', 'ui-sans-serif', 'system-ui'],
         'quicksand': ['Quicksand', 'ui-sans-serif', 'system-ui'],
+        'dancing': ['Dancing Script', 'ui-sans-serif', 'system-ui'],
       },
 
       boxShadow: {

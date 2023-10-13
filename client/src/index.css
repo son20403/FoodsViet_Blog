@@ -20,7 +20,7 @@
 
 @layer base {
     html {
-        @apply font-content
+        @apply font-content !font-medium
         /* 
         font-family: 'Mr Dafoe', cursive;
         font-family: 'Poppins', sans-serif;
@@ -62,7 +62,7 @@
     .content_post.post_item h6,
     .content_post.post_item p,
     .content_post.post_item strong {
-        @apply !font-content !font-normal !text-sm !text-gray-500 !m-0;
+        @apply !font-content !font-medium !text-sm !text-gray-500 !m-0;
     }
 
     .content_post.post_item img {

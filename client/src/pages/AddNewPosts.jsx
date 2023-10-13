@@ -15,7 +15,6 @@ const schemaValidate = Yup.object({
     title: Yup.string().required("Vui lòng nhập tiêu đề!"),
     content: Yup.string().required("Vui lòng nhập nội dung!"),
     image: Yup.mixed().required("Vui lòng nhập ảnh!"),
-
     // .min(6, 'Tên đăng nhập phải lớn hơn 6 kí tự'),
 
 })

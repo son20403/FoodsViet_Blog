@@ -8,7 +8,6 @@ export function getAllComments(token) {
     })
 }
 export function postComments(token, entity) {
-    console.log("🚀 ~ file: request.jsx:11 ~ postComments ~ entity:", entity)
     return axios.post(`/${COLLECTION_NAME}/create`, entity, {
         headers: {
             token: `Bearer ${token}`,

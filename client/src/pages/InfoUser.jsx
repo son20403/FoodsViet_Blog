@@ -1,48 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Heading } from '../components/heading';
 import { Button } from '../components/button';
-import Avatar from '../layout/customers/Avatar';
-import { AtIcon, CommentIcon, EmailIcon, LocationIcon, LockIcon, UserIcon } from '../components/Icon';
-import { Input } from '../components/input';
-import { Field } from '../components/field';
-import InputPassword from '../components/input/InputPassword';
-import ListPost from '../layout/posts/ListPost';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as Yup from "yup";
-import PageWrap from '../layout/common/PageWrap';
-import BannerCommon from '../layout/common/BannerCommon';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import NotFound404 from './not-found/NotFound404';
-import Overlay from '../layout/common/Overlay';
+import { AtIcon, CalendarIcon, CloseIcon, CommentIcon, EditIcon, EmailIcon, LocationIcon, LockIcon, UserIcon } from '../components/Icon';
 
-const schemaValidate = Yup.object({
-    // user_name: Yup.string().required("Vui lòng nhập tên đăng nhập!")
-    //     .max(20, "Tên tài khoản không được dài quá 20 ký tự")
-    //     .min(6, 'Tên đăng nhập phải lớn hơn 6 kí tự'),
-    // full_name: Yup.string().required("Vui lòng nhập họ và tên nhập!")
-    //     .max(22, "Tên không dài quá 23 ký tự")
-    //     .min(6, 'Tên đăng nhập phải lớn hơn 6 kí tự'),
-    // password: Yup.string()
-    //     .required("Vui lòng nhập mật khẩu!")
-    //     .min(6, 'Mật khẩu có ít nhất 8 ký tự!')
-    //     .max(20, "Mật khẩu không được dài quá 20 ký tự")
-    //     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    //         'Mật khẩu cần có ít nhất 1 ký tự in hoa, 1 ký tự thường, 1 số và 1 ký tự đặt biệt!'),
-    // email: Yup.string().required("Vui lòng nhập email!").email("Vui lòng nhập đúng định dạng email!"),
-})
+import ListPost from '../layout/posts/ListPost';
+
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import NotFound404 from './not-found/NotFound404';
+import useToggle from '../hooks/useToggle';
+import { customersRequest } from '../sagas/customers/customersSlice';
+import EditCustomer from '../layout/customers/EditCustomer';
+import { toast } from 'react-toastify';
+import LoadingRequest from '../layout/loading/LoadingRequest';
 
 const InfoUser = () => {
     const { slug } = useParams()
     const navigate = useNavigate();
-    const { customers } = useSelector((state) => state.customers);
-    const { posts, loading } = useSelector((state) => state.posts);
+    const dispatch = useDispatch()
+    const { customers, loading } = useSelector((state) => state.customers);
+    const { token } = useSelector((state) => state.auth);
+    const { handleToggle, toggle } = useToggle(false)
+    const { posts } = useSelector((state) => state.posts);
     const { infoAuth } = useSelector((state) => state.auth);
-    const { handleSubmit, formState: { errors, isSubmitting, isValid }, control } =
-        useForm({ resolver: yupResolver(schemaValidate), mode: 'onBlur', })
-    const handleEditUser = (value) => {
-    }
     const dataCustomer = customers.filter((cus) => cus.slug === slug)[0]
     const dataPostsByCustomer = posts.filter((post) => post.id_customer === dataCustomer?._id) || [1]
     const isAuth = dataCustomer?._id === infoAuth?._id
@@ -50,13 +29,18 @@ const InfoUser = () => {
     useEffect(() => {
         setdataCus(dataCustomer)
     }, [dataCustomer]);
-    if (!dataCus) {
-        return (
-            <><NotFound404></NotFound404></>
-        )
-    }
+    useEffect(() => {
+        dispatch(customersRequest(token))
+    }, []);
+    // if (!dataCus) {
+    //     return (
+    //         <><NotFound404></NotFound404></>
+    //     )
+    // }
+
     return (
         <div className='bg-gray-50 relative'>
+            <LoadingRequest show={loading}></LoadingRequest>
             <div className='w-full h-auto flex flex-col gap-5 '>
                 <div className='relative w-full h-full max-h-[300px] overflow-hidden flex items-center'>
                     <div className='absolute inset-0 bg-black bg-opacity-40'></div>
@@ -83,7 +67,8 @@ const InfoUser = () => {
                                     <CommentIcon></CommentIcon>
                                 </div>
                                 {/* <Button>Follow</Button> */}
-                                {isAuth && <Button className='bg-transparent !text-primary font-medium border-primary'>
+                                {isAuth && <Button onClick={handleToggle} className='bg-transparent 
+                                !text-primary font-medium border-primary'>
                                     Chỉnh sửa thông tin</Button>}
                             </div>
                         </div>
@@ -116,7 +101,7 @@ const InfoUser = () => {
                     </div>
                 </div>
             </div>
-            <EditCustomer></EditCustomer>
+            <EditCustomer data={dataCustomer} show={toggle} onClick={handleToggle} ></EditCustomer>
         </div>
     );
 };
@@ -128,65 +113,5 @@ const WrapInfo = ({ children }) => {
         <div className='flex items-center gap-x-4 py-4 border-b last:border-0 break-words w-full'>
             {children}
         </div>
-    )
-}
-const EditCustomer = () => {
-    const { handleSubmit, formState: { errors, isSubmitting, isValid }, control } =
-        useForm({ resolver: yupResolver(schemaValidate), mode: 'onBlur', })
-    const handleEditUser = (value) => {
-    }
-    return (
-        <div className='absolute top-16 right-0 bg-white p-10'>
-            <Overlay show={true}>
-
-                <form onSubmit={handleSubmit(handleEditUser)} className=' px-2 z-10'>
-                    <div className=' flex justify-between items-center border-b border-primary pb-5'>
-                        <Heading isHeading className=''>Profile</Heading>
-                        <Button type='submit'>SAVE</Button>
-                    </div>
-                    <div className='flex gap-x-5 items-center my-10'>
-                        <Avatar className='!h-20 !w-20 md:!h-24 md:!w-24'></Avatar>
-                        <div className='flex-1 flex items-center gap-x-5'>
-                            <Button className=''>Change photo</Button>
-                            <Button className='bg-white !text-black border-primary'>Delete</Button>
-                        </div>
-                    </div>
-                    <div className='grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3 gap-x-10'>
-                        <Field>
-                            <Input control={control} value={''} errors={errors}
-                                placeholder='Full name' type='text' name='full_name'>
-                                <UserIcon></UserIcon>
-                            </Input>
-                        </Field>
-                        <Field>
-                            <Input control={control} value={''} errors={errors}
-                                placeholder='User Name' type='text' name='user_name' >
-                                <AtIcon></AtIcon>
-                            </Input>
-                        </Field>
-                        <Field>
-                            <Input control={control} value={''} errors={errors}
-                                placeholder='Email' type='email' name='email' >
-                                <EmailIcon></EmailIcon>
-                            </Input>
-                        </Field>
-                        <Field>
-                            <Input control={control} value={''} errors={errors}
-                                placeholder='Address' type='text' name='address' >
-                                <LocationIcon></LocationIcon>
-                            </Input>
-                        </Field>
-                        <Field>
-                            <InputPassword control={control} value={''} errors={errors}
-                                placeholder='Password' name='password'>
-                                <LockIcon></LockIcon>
-                            </InputPassword>
-                        </Field>
-                    </div>
-                </form>
-            </Overlay>
-
-        </div>
-
     )
 }

@@ -36,7 +36,7 @@ const Navbar = ({ showNavbar, handleShowNavbar }) => {
     return (
         <>
             <Overlay show={showNavbar} onClick={handleShowNavbar}></Overlay>
-            <div className={`flex-1 absolute bg-white-cream flex top-full w-full justify-center gap-5 transition-all
+            <div className={`flex-1 absolute  bg-white-cream flex top-full w-full justify-center gap-5 transition-all
                 flex-col px-5 py-5 text-sm z-[10] shadow-soft border-t border-primary
                 ${showNavbar ? 'left-0' : '-left-full'}
                 lg:gap-10 md:static md:flex-row md:p-0 md:bg-transparent md:flex md:gap-4
@@ -44,7 +44,7 @@ const Navbar = ({ showNavbar, handleShowNavbar }) => {
                 {listLink.map(({ to, title, id }) => (
                     <NavLink
                         className={({ isActive }) => isActive ? 'text-primary' : ''} key={id} to={to}>
-                        <Heading isHeading className='text-base font-medium'>{title}</Heading></NavLink>
+                        <Heading isHeading className='text-base font-medium z-[9]'>{title}</Heading></NavLink>
                 ))}
             </div>
         </>

@@ -14,6 +14,15 @@ export function getAllCustomers(token) {
         },
     })
 }
+export function updateCustomer(token, entity) {
+    return axios.put(`/${COLLECTION_NAME}/updateCustomer`, entity, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            token: `Bearer ${token}`,
+        },
+    })
+}
+
 // headers: {
 //     "Content-Type": "multipart/form-data",
 //     token: `Bearer ${token}`,

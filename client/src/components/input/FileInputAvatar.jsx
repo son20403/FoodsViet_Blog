@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useController } from 'react-hook-form';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Label } from '../label';
 import useImagePreview from '../../hooks/useImagePreview';
 import { Typography } from '../typography';
 
 
-const FileInput = ({ name, className = '', oldImage, errors, control, isAvatar = false, ...props }) => {
+const FileInputAvatar = ({ name, className = '', oldImage, errors, lable, control, ...props }) => {
 
     const isErr = !!errors?.[name]
 
@@ -18,7 +19,7 @@ const FileInput = ({ name, className = '', oldImage, errors, control, isAvatar =
     const handleSetImage = () => {
         clearPreview()
         setImageOld('')
-        inputField.onChange('');
+        inputField.onChange(null);
     }
     const handleOnChange = (e) => {
         inputField.onChange(e.target.files[0]);
@@ -26,11 +27,9 @@ const FileInput = ({ name, className = '', oldImage, errors, control, isAvatar =
     }
     return (
         <>
-            <div className={`relative  h-full w-full  overflow-hidden
-            ${isAvatar ? '' : " mt-3 min-h-[200px] lg:min-h-[300px]"} `}>
+            <div className={`relative h-full w-full  overflow-hidden   `}>
                 <label htmlFor={name} className={`block w-full h-full 
-                    bg-gray-200 focus:bg-white cursor-pointer absolute 
-                    ${isAvatar ? "rounded-full" : "rounded-lg"}
+                    rounded-full bg-gray-200 focus:bg-white cursor-pointer absolute 
                     ${isErr ? "border border-red-500" : ''}`}>
                     <input type='file'
                         id={name}
@@ -43,20 +42,17 @@ const FileInput = ({ name, className = '', oldImage, errors, control, isAvatar =
                         <div className=' absolute inset-0 flex justify-center items-center cursor-pointer'>
                             <div className='flex flex-col justify-center items-center gap-5'>
                                 <img src='../../src/assets/img-upload.png'
-                                    alt="preview" className={`${isAvatar ? 'w-12 h-12' : 'w-16 h-16'}  object-cover`} />
-                                <p className={`${isAvatar ? 'text-xs' : 'text-sm '} font-body font-semibold `}
-                                >Choose image</p>
+                                    alt="preview" className=" w-12 h-12 object-cover" />
+                                <p className='text-xs font-body font-semibold '>Choose image</p>
                             </div>
                         </div>
                     }
                 </label>
                 {preview &&
-                    <PreviewImage imageOld={imageOld} isAvatar={isAvatar} preview={preview}
-                        onClick={handleSetImage}></PreviewImage>
+                    <PreviewImage imageOld={imageOld} preview={preview} onClick={handleSetImage}></PreviewImage>
                 }
                 {!preview && imageOld &&
-                    <PreviewImage imageOld={imageOld} isAvatar={isAvatar} preview={preview}
-                        onClick={handleSetImage}></PreviewImage>
+                    <PreviewImage imageOld={imageOld} preview={preview} onClick={handleSetImage}></PreviewImage>
 
                 }
             </div>
@@ -68,9 +64,9 @@ const FileInput = ({ name, className = '', oldImage, errors, control, isAvatar =
     );
 };
 
-const PreviewImage = ({ onClick = () => { }, preview, imageOld, isAvatar = false }) => {
+const PreviewImage = ({ onClick = () => { }, preview, imageOld }) => {
     return (
-        <div className={`w-full h-full absolute overflow-hidden border ${isAvatar ? 'rounded-full' : ' rounded-lg '}`}>
+        <div className='w-full h-full absolute rounded-full overflow-hidden border'>
             <div className=' absolute inset-0 flex justify-center items-center group transition-all'>
                 <FontAwesomeIcon
                     onClick={onClick}
@@ -83,4 +79,4 @@ const PreviewImage = ({ onClick = () => { }, preview, imageOld, isAvatar = false
     )
 }
 
-export default FileInput;
+export default FileInputAvatar;

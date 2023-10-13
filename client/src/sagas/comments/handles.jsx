@@ -1,7 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { getAllComments, postComments } from "./request";
-import { getCommentsSuccess, postCommentsSuccess, requestFailure } from "./commentsSlice";
-import { setNotifyGlobal } from "../global/globalSlice";
+import { commentsRequest, getCommentsSuccess, postCommentsSuccess, requestFailure } from "./commentsSlice";
+import { setErrorGlobal, setNotifyGlobal } from "../global/globalSlice";
 
 export function* handleGetAllComments({ payload }) {
     try {
@@ -10,11 +10,7 @@ export function* handleGetAllComments({ payload }) {
             yield put(getCommentsSuccess(response.data))
         }
     } catch (error) {
-        if (error?.code === 'ERR_NETWORK') {
-            yield put(requestFailure(error));
-        } else {
-            yield put(requestFailure(error?.response?.data));
-        }
+        handleCommonError(error)
     }
 }
 export function* handlePostComments({ payload }) {
@@ -23,19 +19,27 @@ export function* handlePostComments({ payload }) {
         const response = yield call(postComments, payload?.token, payload.comment);
         if (response) {
             yield put(postCommentsSuccess(response.data.message))
+            yield put(commentsRequest(payload?.token))
             yield put(setNotifyGlobal(response.data?.message))
 
         }
     } catch (error) {
-        if (error?.code === 'ERR_NETWORK') {
-            yield put(requestFailure(error));
-        } else {
-            yield put(requestFailure(error?.response?.data));
-            yield put(setNotifyGlobal(''))
-
-        }
+        handleCommonError(error)
     }
 }
+
+function* handleCommonError(error) {
+    console.log("error:", error)
+    if (error?.code === 'ERR_NETWORK') {
+        yield put(requestFailure(error));
+        yield put(setErrorGlobal(error?.message));
+    } else {
+        yield put(setNotifyGlobal(''))
+        yield put(requestFailure(error?.response?.data));
+        yield put(setErrorGlobal(error?.response?.data?.message));
+    }
+}
+
 
 // export function* registerCustomer({ payload }) {
 //     try {

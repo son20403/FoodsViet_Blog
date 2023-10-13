@@ -3,6 +3,7 @@ import { lazy, useEffect } from 'react';
 import MainLayout from './layout/MainLayout.';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import NotFound404 from './pages/not-found/NotFound404';
 
 const InfoUser = lazy(() => import("./pages/InfoUser"));
 const DetailPage = lazy(() => import("./pages/DetailPage"));
@@ -36,7 +37,7 @@ function App() {
         <Route path="/signin" element={<SignInSignUp />} />
         <Route path="/signup" element={<SignUp />} />
         {!token && <Route path="*" element={<Navigate to="/signin" />} />}
-        <Route path="*" element={<div>Not Found</div>} />
+        <Route path="*" element={<NotFound404></NotFound404>} />
       </Routes>
     </div>
   );

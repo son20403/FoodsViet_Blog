@@ -40,7 +40,7 @@ const Header = () => {
     const [isScroll, setIsScroll] = useState(false);
     useEffect(() => {
         const handleScrollbar = () => {
-            setIsScroll(window.scrollY >= 150);
+            setIsScroll(window.scrollY >= 50);
         }
         window.addEventListener('scroll', handleScrollbar)
         return () => {

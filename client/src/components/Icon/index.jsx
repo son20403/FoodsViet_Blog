@@ -2,6 +2,7 @@ import ArrowNextIcon from "./ArrowNextIcon";
 import AtIcon from "./AtIcon";
 import BookmarkIcon from "./BookmarkIcon";
 import CalendarIcon from "./CalendarIcon";
+import CloseIcon from "./CloseIcon";
 import CommentIcon from "./CommentIcon";
 import EditIcon from "./EditIcon";
 import EmailIcon from "./EmailIcon";
@@ -19,6 +20,7 @@ import TwitterIcon from "./TwitterIcon";
 import UserIcon from "./UserIcon";
 import YoutuberIcon from "./YoutuberIcon";
 export {
+    CloseIcon,
     SearchIcon,
     ArrowNextIcon,
     BookmarkIcon,

@@ -14,6 +14,7 @@ import { setErrorGlobal, setNotifyGlobal } from '../sagas/global/globalSlice';
 function MainLayout() {
     const dispatch = useDispatch()
     const location = useLocation();
+
     const { token } = useSelector((state) => state.auth);
     const tokenLocal = localStorage.getItem('authToken')
     useEffect(() => {

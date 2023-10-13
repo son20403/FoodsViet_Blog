@@ -49,7 +49,6 @@ const DetailPage = () => {
             }
             dispatch(postCommentsRequest({ token, comment }))
             handleResetForm()
-            dispatch(commentsRequest(token))
         } else {
             toast.error('Nhập nội dung trước khi bình luận')
         }

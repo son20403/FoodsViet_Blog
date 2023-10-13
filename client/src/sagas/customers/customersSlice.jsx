@@ -14,7 +14,6 @@ const authSlice = createSlice({
         customersRequest: (state) => {
             return {
                 ...state,
-                loading: true,
                 error: null,
             }
         },
@@ -22,7 +21,18 @@ const authSlice = createSlice({
             return {
                 ...state,
                 customers: action.payload,
-                loading: false,
+                error: null,
+            }
+        },
+        updateCustomerRequest: (state) => {
+            return {
+                ...state,
+                error: null,
+            }
+        },
+        updateCustomerSuccess: (state, action) => {
+            return {
+                ...state,
                 error: null,
             }
         },
@@ -47,10 +57,16 @@ const authSlice = createSlice({
                 loading: false,
                 error: null,
             }
+        },
+        setLoadingCustomer: (state, action) => {
+            return {
+                ...state,
+                loading: action.payload
+            }
         }
 
     }
 })
 
-export const { customersRequest, customersSuccess, requestFailure, customerDetailRequest, customerDetailSuccess } = authSlice.actions
+export const { customersRequest, customersSuccess, requestFailure, customerDetailRequest, customerDetailSuccess, updateCustomerRequest, updateCustomerSuccess, setLoadingCustomer } = authSlice.actions
 export default authSlice.reducer
