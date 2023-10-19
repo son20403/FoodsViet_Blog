@@ -5,12 +5,12 @@ import { setErrorGlobal, setNotifyGlobal } from "../global/globalSlice";
 
 export function* handleGetDetailCustomer({ payload }) {
     try {
-        const response = yield call(getDetailCustomer, payload.token, payload.id);
+        const response = yield call(getDetailCustomer, payload.token, payload.slug);
         if (response) {
             yield put(customerDetailSuccess(response.data))
         }
     } catch (error) {
-        handleCommonError(error)
+        yield handleCommonError(error)
     }
 }
 
@@ -21,7 +21,7 @@ export function* handleGetAllCustomers({ payload }) {
             yield put(customersSuccess(response.data))
         }
     } catch (error) {
-        handleCommonError(error)
+        yield handleCommonError(error)
     }
 }
 
@@ -55,7 +55,7 @@ export function* handleUpdateCustomers({ payload }) {
             yield put(setLoadingCustomer(false))
         }
     } catch (error) {
-        handleCommonError(error)
+        yield handleCommonError(error)
     }
 }
 

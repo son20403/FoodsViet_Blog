@@ -46,7 +46,6 @@ const authSlice = createSlice({
         customerDetailRequest: (state) => {
             return {
                 ...state,
-                loading: true,
                 error: null,
             }
         },

@@ -8,7 +8,7 @@ const ListCustomer = ({ data }) => {
     return (
         <ListWrapItem>
             {data?.length > 0 ? data?.map((item) => (
-                <ItemImage key={item._id} data={item} ></ItemImage>
+                <ItemImage isCustomer key={item._id} data={item} ></ItemImage>
             )) :
                 arr.map((item, index) => (
                     <ItemImageSkeleton key={index} ></ItemImageSkeleton>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Heading } from '../components/heading';
 import { Field } from '../components/field';
 import { Label } from '../components/label';
@@ -11,6 +11,8 @@ import { Button } from '../components/button';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup";
 import PageWrap from '../layout/common/PageWrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { categoriesRequest } from '../sagas/categories/categoriesSlice';
 const schemaValidate = Yup.object({
     title: Yup.string().required("Vui lòng nhập tiêu đề!"),
     content: Yup.string().required("Vui lòng nhập nội dung!"),
@@ -19,11 +21,17 @@ const schemaValidate = Yup.object({
 
 })
 const AddNewPosts = () => {
+    const dispatch = useDispatch()
+    const { token } = useSelector((state) => state.auth)
     const { handleSubmit, formState: { errors, isSubmitting, isValid }, control } =
         useForm({ resolver: yupResolver(schemaValidate), mode: 'onBlur', })
+    const { categories } = useSelector((state) => state.categories)
     const handleSubmits = (value) => {
         console.log(value)
     }
+    useEffect(() => {
+        dispatch(categoriesRequest(token))
+    }, []);
     return (
         <PageWrap>
             <div className='page-content mt-5 px-2'>
@@ -37,7 +45,7 @@ const AddNewPosts = () => {
                             </Input>
                         </Field>
                         <Field>
-                            <Select control={control} name={'select_demo'} value='' />
+                            <Select data={categories} control={control} name={'category'} />
                         </Field>
                         <div className=' col-span-1 md:col-span-2 mb-10'>
                             <Label htmlFor={"image"}>Hình ảnh</Label>

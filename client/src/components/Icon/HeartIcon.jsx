@@ -1,12 +1,10 @@
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const HeartIcon = () => {
+const HeartIcon = ({ isLiked = false }) => {
     return (
-        <>
-            <ion-icon name="heart-outline"></ion-icon>
-        </>
+        <span className={`flex items-center justify-center ${isLiked ? 'text-red-500' : ''}`}>
+            <ion-icon name={`${isLiked ? "heart" : "heart-outline"}`}></ion-icon>
+        </span>
     );
 };
 

@@ -1,0 +1,91 @@
+[{
+  "_id": {
+    "$oid": "64cfc56bb34507127db436b5"
+  },
+  "user_name": "admin",
+  "email": "sonntpd05961@fpt.edu.vn",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$nfnbrfFA/KqGOz+69Eh8Kw$TJOG1SezXTkG2qW/YnmcxrbXD35RIBYr6ZM1P/FYNKk",
+  "image": "https://res.cloudinary.com/dumtfciwr/image/upload/v1690875682/React_Blogger/gibnqhii6qdescxct5hp.png",
+  "full_name": "Nguyen Truong Son",
+  "id_image": "React_Blogger/gibnqhii6qdescxct5hp",
+  "address": "Cầu Tam Kỳ",
+  "__v": 0,
+  "slug": "admin",
+  "admin": true,
+  "role": "admin"
+},
+{
+  "_id": {
+    "$oid": "64d0f325cbdedd33460331e8"
+  },
+  "user_name": "son123",
+  "email": "ntstruongson2k3@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$aaAShJSiqw0hidUH7XFanw$NFNzo6zpmEtyxmDDTFwHyjdZklWpuG9h3RAuXkGV6cU",
+  "image": "https://e7.pngegg.com/pngimages/166/90/png-clipart-computer-icons-user-setting-icon-miscellaneous-monochrome.png",
+  "full_name": "Nguyen Truong Son",
+  "id_image": "",
+  "address": "Tam Vinh - Phu Ninh - Quang Nam",
+  "admin": "true",
+  "role": "admin",
+  "slug_history": [
+    "nguyen-truong-son"
+  ],
+  "slug": "nguyen-truong-son",
+  "createdAt": {
+    "$date": "2023-08-07T13:35:33.133Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-12T12:07:10.022Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d0f49ac88151d8e8948826"
+  },
+  "user_name": "chien1505",
+  "email": "chien1505@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$caUFibhT1JD/yWgwlxrEfQ$+rGP+yLLDOBNmREpa58FcDbCbCrCh/Kg1w6M9V3VU+g",
+  "image": "https://res.cloudinary.com/dumtfciwr/image/upload/v1691842020/React_Blogger/mxsat4cijhhruq6overv.jpg",
+  "full_name": "Doan Dinh Chien",
+  "id_image": "React_Blogger/mxsat4cijhhruq6overv",
+  "address": "Tam Ky  - Quang Nam",
+  "admin": "true",
+  "role": "staff",
+  "slug_history": [
+    "doan-dinh-chien"
+  ],
+  "slug": "doan-dinh-chien",
+  "createdAt": {
+    "$date": "2023-08-07T13:41:46.694Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-12T12:07:03.518Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d7782107116fba955cc7d1"
+  },
+  "user_name": "tanluc123",
+  "email": "Tanluc123@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$xteikll57lFR2RNmrVnMwA$HGANyqp5s5Z9g4TneiOEIPORx8JoHIGJx+j8NUGPZPE",
+  "image": "https://res.cloudinary.com/dumtfciwr/image/upload/v1691842598/React_Blogger/ymygkcoxqegmv6qgxwcp.jpg",
+  "full_name": "Nguyễn Tấn Lực",
+  "id_image": "React_Blogger/ymygkcoxqegmv6qgxwcp",
+  "address": "Tam Kỳ - Quảng Nam",
+  "admin": "true",
+  "role": "admin",
+  "slug_history": [
+    "nguyen-tan-luc"
+  ],
+  "slug": "nguyen-tan-luc",
+  "createdAt": {
+    "$date": "2023-08-12T12:16:33.313Z"
+  },
+  "updatedAt": {
+    "$date": "2023-08-12T12:16:33.313Z"
+  },
+  "__v": 0
+}]

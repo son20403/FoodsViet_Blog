@@ -16,6 +16,9 @@ const Header = () => {
     const location = useLocation();
     const dispatch = useDispatch()
     const { showSearch, showSetting, showNavbar } = useSelector((state) => state.global)
+    const { infoAuth } = useSelector((state) => state.auth)
+    const { customers } = useSelector((state) => state.customers)
+    const dataAuth = customers.filter((cus) => cus._id === infoAuth?._id)[0]
     const handleShowNavbar = () => {
         dispatch(toggleNavbar())
         dispatch(closeSearch())
@@ -35,7 +38,7 @@ const Header = () => {
         dispatch(closeNavbar())
         dispatch(closeSearch())
         dispatch(closeSetting())
-    }, [location.pathname, dispatch]);
+    }, [location?.pathname, dispatch]);
 
     const [isScroll, setIsScroll] = useState(false);
     useEffect(() => {
@@ -63,7 +66,7 @@ const Header = () => {
                         onClick={handleShowSearch}>
                         <SearchIcon />
                     </span>
-                    <Avatar onClick={handleShowSetting}></Avatar>
+                    <Avatar onClick={handleShowSetting} image={dataAuth?.image}></Avatar>
                     <div className='md:hidden' onClick={handleShowNavbar}>
                         <FontAwesomeIcon className={` ${showNavbar ? 'text-2xl' : 'text-xl'} 
                         ${isScroll ? '!text-black ' : '!text-white'}`}

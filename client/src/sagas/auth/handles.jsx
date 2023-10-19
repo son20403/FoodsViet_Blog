@@ -9,20 +9,12 @@ export function* authenticateCustomer({ payload }) {
         const response = yield call(loginAuth, payload);
         if (response) {
             const { message, accessToken, ...info } = response.data
-            console.log("🚀 ~ file: handles.jsx:12 ~ function*authenticateCustomer ~ info:", info)
             yield put(setNotifyGlobal(message))
             yield put(loginSuccess(accessToken))
             yield put(setInfoAuth(info))
         }
     } catch (error) {
-        if (error?.code === 'ERR_NETWORK') {
-            yield put(requestFailure(error));
-            yield put(setErrorGlobal(error?.message));
-        } else {
-            yield put(setNotifyGlobal(''))
-            yield put(requestFailure(error?.response?.data));
-            yield put(setErrorGlobal(error?.response?.data?.message));
-        }
+        yield handleCommonError(error)
     }
 }
 
@@ -36,14 +28,7 @@ export function* registerCustomer({ payload }) {
         }
 
     } catch (error) {
-        if (error?.code === 'ERR_NETWORK') {
-            yield put(requestFailure(error));
-            yield put(setErrorGlobal(error?.message));
-        } else {
-            yield put(setNotifyGlobal(''))
-            yield put(requestFailure(error?.response?.data));
-            yield put(setErrorGlobal(error?.response?.data?.message));
-        }
+        yield handleCommonError(error)
     }
 }
 export function* logoutCustomer({ payload }) {
@@ -55,13 +40,18 @@ export function* logoutCustomer({ payload }) {
         }
 
     } catch (error) {
-        if (error?.code === 'ERR_NETWORK') {
-            yield put(requestFailure(error));
-            yield put(setErrorGlobal(error?.message));
-        } else {
-            yield put(setNotifyGlobal(''))
-            yield put(requestFailure(error?.response?.data));
-            yield put(setErrorGlobal(error?.response?.data?.message));
-        }
+        yield handleCommonError(error)
+    }
+}
+
+function* handleCommonError(error) {
+    console.log("error:", error)
+    if (error?.code === 'ERR_NETWORK') {
+        yield put(requestFailure(error));
+        yield put(setErrorGlobal(error?.message));
+    } else {
+        yield put(setNotifyGlobal(''))
+        yield put(requestFailure(error?.response?.data));
+        yield put(setErrorGlobal(error?.response?.data?.message));
     }
 }

@@ -5,7 +5,7 @@ import uploadCloud from '../middlewares/uploader'
 import middlewareAuth from '../middlewares/auth'
 
 
-router.post('/register', middlewareAuth.verifyTokenAdmin, adminController.register)
+router.post('/register', middlewareAuth.verifyToken, middlewareAuth.verifyTokenAdmin('admin'), adminController.register)
 router.post('/createCustomer', middlewareAuth.verifyTokenAdmin, uploadCloud.single("image"), adminController.createCustomer)
 router.post('/createAdmin', middlewareAuth.verifyTokenAdmin, uploadCloud.single("image"), adminController.register)
 router.post('/login', adminController.login) //middlewareAuth.verifyTokenAdmin

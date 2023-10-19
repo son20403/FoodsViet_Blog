@@ -9,7 +9,7 @@ const connect = async () => {
         const changeStream = db.watch(); // create change stream on the entire database
 
         changeStream.on('change', (change) => {
-            console.log(change);
+            console.log('change :', change);
         });
     } catch (error) {
         console.log(error.message);

@@ -11,7 +11,8 @@ router.get('/getAllPostByCustomer?:id', postController.getAllPostByCustomer)
 router.get('/getPostByCategory?:id', postController.getPostByCategory)
 router.get('/detail?:slug', postController.detailBySlug)
 router.put('/like?:id', middlewareAuth.verifyToken, postController.like)
-router.put('/updatePost?:id', uploadCloud.single("image"), middlewareAuth.verifyToken, postController.updatePost)
+router.put('/updatePost?:id', middlewareAuth.verifyToken, uploadCloud.single("image"), postController.updatePost)
+router.post('/uploadImage', middlewareAuth.verifyToken, uploadCloud.single("image"), postController.uploadImage)
 router.put('/updateView?:slug', postController.updateView)
 
 module.exports = router;

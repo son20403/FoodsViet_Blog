@@ -10,7 +10,7 @@ export function* handleGetAllComments({ payload }) {
             yield put(getCommentsSuccess(response.data))
         }
     } catch (error) {
-        handleCommonError(error)
+        yield handleCommonError(error)
     }
 }
 export function* handlePostComments({ payload }) {
@@ -24,7 +24,7 @@ export function* handlePostComments({ payload }) {
 
         }
     } catch (error) {
-        handleCommonError(error)
+        yield handleCommonError(error)
     }
 }
 

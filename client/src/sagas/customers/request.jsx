@@ -1,7 +1,7 @@
 import axios from "../../axios-interceptor/api";
 const COLLECTION_NAME = 'customer'
-export function getDetailCustomer(token, id) {
-    return axios.get(`/${COLLECTION_NAME}/detail?id=${id}`, {
+export function getDetailCustomer(token, slug) {
+    return axios.get(`/${COLLECTION_NAME}/detail?slug=${slug}`, {
         headers: {
             token: `Bearer ${token}`,
         },

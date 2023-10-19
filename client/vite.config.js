@@ -10,3 +10,5 @@ export default defineConfig({
     // port: 4000,       // Thay đổi cổng tại đây
   },
 })
+// "ckeditor5-custom-build"
+// "ckeditor5-custom-build": "file:ckeditor5",

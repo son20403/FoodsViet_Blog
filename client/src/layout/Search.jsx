@@ -5,24 +5,27 @@ import { Heading } from '../components/heading';
 import Overlay from './common/Overlay';
 import { SearchIcon } from '../components/Icon';
 import { Button, Input } from '@material-tailwind/react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import removeAccents from 'remove-accents';
+import _ from 'lodash'
 import { Link } from 'react-router-dom';
+import { searchPostsRequest } from '../sagas/posts/postsSlice';
+import Loading from './loading/Loading';
 
 const Search = ({ showSearch, handleShowSearch }) => {
-    // const [query, setQuery] = useState('');
-    const { posts } = useSelector((state) => state.posts)
-    const [listPostResults, setListPostResults] = useState([]);
-    const removeDiacritics = (str) => {
-        return removeAccents(str);
-    };
-    const handleOnChange = (e) => {
-        const value = e.target.value
-        const filteredPosts = posts.filter((post) =>
-            removeDiacritics(post.title.toLowerCase()).includes(removeDiacritics(value.toLowerCase()))
-        );
-        setListPostResults(filteredPosts);
-    }
+    const dispatch = useDispatch()
+    const { search_posts, loading } = useSelector((state) => state.posts)
+    const { token } = useSelector((state) => state.auth)
+    const [query, setQuery] = useState('');
+    const handleOnChange = _.debounce((e) => {
+        setQuery(e.target.value)
+    }, 1000)
+    useEffect(() => {
+        dispatch(searchPostsRequest({ token, query }))
+    }, [query]);
+    useEffect(() => {
+        setQuery('')
+    }, [location.pathname]);
     return (
         <>
             <Overlay show={showSearch} onClick={handleShowSearch}></Overlay>
@@ -35,19 +38,22 @@ const Search = ({ showSearch, handleShowSearch }) => {
                     <FontAwesomeIcon icon={faXmark} />
                 </div>
                 <div className='page-content'>
-                    <Input variant="standard" label={'Nhập nội dung tìm kiếm'} onChange={handleOnChange} icon={<SearchIcon />}></Input>
+                    <Input variant="standard" label={'Nhập nội dung tìm kiếm'} onChange={handleOnChange}
+                        icon={<SearchIcon />}></Input>
+
                     <div className='flex flex-col'>
-                        {listPostResults.length > 0 ? listPostResults?.slice(0, 5).map((item) => (
+                        {loading && <Loading />}
+                        {!loading && search_posts?.length > 0 ? search_posts?.slice(0, 5).map((item) => (
                             <SearchItem key={item._id} data={item}></SearchItem>
                         )) : <span className='text-center my-4'>Không có dữ liệu</span>}
                     </div>
-                    {listPostResults.length > 5 && (
+                    {search_posts?.length > 5 && (
                         <div className=' flex w-full justify-center'>
-                            <Link className='text-xs text-primary px-2 py-1 border 
+                            <Link to={`/posts?query=${query}`} className='text-xs text-primary px-2 py-1 border 
                             max-w-[200px] border-primary'>Xem thêm</Link>
                         </div>
                     )}
-                    <div>Kết quả tìm kiếm: ({listPostResults.length})
+                    <div>Kết quả tìm kiếm: ({search_posts?.length})
                     </div>
                 </div>
             </div>

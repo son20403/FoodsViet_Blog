@@ -16,7 +16,7 @@ export default function useGetDetailCustomer(token, id) {
                 return setDataCustomer([])
             }
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
         }
         setIsLoading(false)
     }

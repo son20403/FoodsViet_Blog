@@ -2,7 +2,7 @@ import Post from '../models/Post'
 const cloudinary = require("cloudinary").v2;
 const _ = require("lodash");
 import BaseController from './Controller'
-
+const unidecode = require("unidecode");
 class PostController extends BaseController {
     constructor(model) {
         super(model)
@@ -35,7 +35,7 @@ class PostController extends BaseController {
             }
         } catch (error) {
             if (fileData) cloudinary.uploader.destroy(id_image);
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Có lỗi xảy ra",
                 error: error._message,
@@ -85,7 +85,7 @@ class PostController extends BaseController {
             }
             return res.status(200).json(dataPost);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -102,7 +102,7 @@ class PostController extends BaseController {
             }
             return res.status(200).json(dataPost);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -127,7 +127,7 @@ class PostController extends BaseController {
                 message: "update thanh cong"
             });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -135,23 +135,27 @@ class PostController extends BaseController {
     };
     search = async (req, res) => {
         try {
-            const key = req.query.key;
-            const $regex = _.escapeRegExp(key);
-            const $options = _.escapeRegExp("i");
-            const query = {
-                $or: [
-                    { title: { $regex, $options } },
-                    { slug: { $regex, $options } },
-                ],
-            };
-            const dataPost = await this.model.find(query);
-            if (!dataPost)
-                return res.status(400).json({
-                    message: "Có lỗi xảy ra",
-                });
-            return res.status(200).json(dataPost);
+            const value = req.query.key;
+            if (value !== '') {
+                // const key = unidecode(value)
+                const keyRegex = new RegExp(value, 'i')
+                const query = {
+                    $or: [
+                        { title: { $regex: keyRegex } },
+                        { slug: { $regex: keyRegex } },
+                    ],
+                };
+                const dataPost = await this.model.find(query);
+                if (!dataPost)
+                    return res.status(400).json({
+                        message: "Có lỗi xảy ra",
+                    });
+                return res.status(200).json(dataPost);
+            } else {
+                return res.status(200).json([])
+            }
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -199,7 +203,25 @@ class PostController extends BaseController {
             return res.status(200).json({ ...others, message: "Cập nhật thành công" });
         } catch (error) {
             if (fileData) cloudinary.uploader.destroy(fileData.filename);
-            console.log(error);
+            console.log('err', error);
+            return res.status(500).json({
+                message: "Lỗi Server",
+            });
+        }
+    };
+    uploadImage = async (req, res) => {
+        const fileData = req.file;
+        console.log("🚀 ~ file: PostController.js:214 ~ PostController ~ uploadImage= ~ fileData:", fileData)
+        try {
+            if (!fileData) {
+                return res.status(400).json({
+                    message: "Không có ảnh tải lên!",
+                });
+            }
+            return res.status(200).json({ url: fileData.path });
+        } catch (error) {
+            if (fileData) cloudinary.uploader.destroy(fileData.filename);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });

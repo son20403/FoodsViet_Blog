@@ -1,18 +1,19 @@
 import React from 'react';
 import { Heading } from '../components/heading';
+import { Link } from 'react-router-dom';
 
-const ItemImage = ({ data, className = '' }) => {
+const ItemImage = ({ data, className = '', isCustomer = false }) => {
     return (
-        <div>
+        <Link to={isCustomer ? `/info/${data?.slug}` : `category/${data?.slug}`}>
             <div className={`flex flex-col justify-center items-center gap-y-2 ${className}`}>
                 <div className={`w-[100px] h-[100px]  md:w-[150px] md:h-[150px] rounded-full overflow-hidden`}>
                     <img src={data?.image} alt=""
                         className='w-full h-full object-cover' />
                 </div>
                 <Heading className='text-center text-sm md:text-base font-semibold'>
-                    {data?.title || data?.full_name || ''}</Heading>
+                    {isCustomer ? data?.full_name : data?.title}</Heading>
             </div>
-        </div>
+        </Link>
     );
 };
 

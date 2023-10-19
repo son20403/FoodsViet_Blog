@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import { Input, InputPassword } from '../components/input';
-import { EmailIcon, LockIcon, UserIcon } from '../components/Icon';
+import { EmailIcon, UserIcon } from '../components/Icon';
 import { Button } from '../components/button';
-import AuthenWrap from '../layout/common/AuthenWrap';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerRequest } from '../sagas/auth/authSlice';
-import { toast } from 'react-toastify';
 const schemaValidate = Yup.object({
     user_name: Yup.string().required("Vui lòng nhập tên đăng nhập!")
         .max(20, "Tên tài khoản không được dài quá 20 ký tự")

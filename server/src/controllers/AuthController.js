@@ -18,7 +18,7 @@ class AuthController extends BaseController {
                 customer,
             });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi server!!!",
             });

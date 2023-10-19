@@ -3,10 +3,13 @@ import Editor from 'ckeditor5-custom-build';
 import React, { useEffect, useRef } from 'react';
 import { useController } from 'react-hook-form';
 import { Typography } from '../typography';
-
+import { useSelector } from 'react-redux';
+import { uploadPlugin } from './plugin';
+import './style.css'
 const Textarea = ({ name, control, value = '', errors }) => {
-
+    const { token } = useSelector((state) => state.auth)
     const { field } = useController({ name, control, defaultValue: value, rules: { required: true } });
+
     const isErr = !!errors?.[name]
     const editorRef = useRef(null);
 
@@ -23,10 +26,11 @@ const Textarea = ({ name, control, value = '', errors }) => {
     return (
         <div ref={editorRef} className='textarea_custom'>
             <CKEditor
-                {...field}
                 config={{
-                    placeholder: 'Nhập nội dung...'
+                    placeholder: 'Nhập nội dung...',
+                    extraPlugins: [uploadPlugin],
                 }}
+                {...field}
                 editor={Editor}
                 data={field.value}
                 onBlur={field.onBlur}
@@ -35,8 +39,6 @@ const Textarea = ({ name, control, value = '', errors }) => {
                     const data = editor.getData();
                     field.onChange(data);
                 }}
-
-
             />
             {isErr ? (
                 <Typography error={errors?.[name]} className={' text-xs text-[#E74C3C]'}>

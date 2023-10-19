@@ -1,6 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { getAllCaterories } from "./request";
 import { getCategoriesSuccess, requestFailure } from "./categoriesSlice";
+import { setErrorGlobal, setNotifyGlobal } from "../global/globalSlice";
 
 export function* handleGetAllCategories({ payload }) {
     try {
@@ -9,11 +10,18 @@ export function* handleGetAllCategories({ payload }) {
             yield put(getCategoriesSuccess(response.data))
         }
     } catch (error) {
-        if (error?.code === 'ERR_NETWORK') {
-            yield put(requestFailure(error));
-        } else {
-            yield put(requestFailure(error?.response?.data));
-        }
+        yield handleCommonError(error)
+    }
+}
+function* handleCommonError(error) {
+    console.log("error:", error)
+    if (error?.code === 'ERR_NETWORK') {
+        yield put(requestFailure(error));
+        yield put(setErrorGlobal(error?.message));
+    } else {
+        yield put(setNotifyGlobal(''))
+        yield put(requestFailure(error?.response?.data));
+        yield put(setErrorGlobal(error?.response?.data?.message));
     }
 }
 

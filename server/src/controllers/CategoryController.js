@@ -16,7 +16,7 @@ class CategoryController extends BaseController {
             }
             return res.status(200).json(data);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -48,7 +48,7 @@ class CategoryController extends BaseController {
                 });
             }
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Có lỗi xảy ra",
                 error: error._message,

@@ -25,7 +25,7 @@ function MainLayout() {
         dispatch(setNotify())
         dispatch(setErrorGlobal(''))
         dispatch(setNotifyGlobal(''))
-    }, [token, dispatch, tokenLocal, location.pathname]);
+    }, [token, dispatch, tokenLocal, location?.pathname]);
     const navigate = useNavigate();
     useEffect(() => {
         if (!token) navigate('/signin')

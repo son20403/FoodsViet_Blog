@@ -4,6 +4,7 @@ import BASE_URL from '../connect';
 import store from '../sagas/configureStore';
 import { logout, refreshAccessTokenSuccess } from '../sagas/auth/authSlice';
 import { toast } from 'react-toastify';
+import { setErrorGlobal } from '../sagas/global/globalSlice';
 
 const api = axios.create({
     baseURL: BASE_URL,
@@ -29,7 +30,7 @@ api.interceptors.response.use((response) => {
 }, (error) => {
     if (error.response && error.response.data.status === 'notAuth') {
         store.dispatch(logout());
-        toast.error('Phiên bản đăng nhập đã hết hạn!')
+        store.dispatch(setErrorGlobal('Phiên bản đăng nhập đã hết hạn!'))
     }
     return Promise.reject(error);
 });

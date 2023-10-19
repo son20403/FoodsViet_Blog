@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '../components/button';
-import { AtIcon, CalendarIcon, CloseIcon, CommentIcon, EditIcon, EmailIcon, LocationIcon, LockIcon, UserIcon } from '../components/Icon';
+import { CommentIcon, EmailIcon, LocationIcon, UserIcon } from '../components/Icon';
 
 import ListPost from '../layout/posts/ListPost';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import NotFound404 from './not-found/NotFound404';
 import useToggle from '../hooks/useToggle';
 import { customersRequest } from '../sagas/customers/customersSlice';
 import EditCustomer from '../layout/customers/EditCustomer';
-import { toast } from 'react-toastify';
 import LoadingRequest from '../layout/loading/LoadingRequest';
 
 const InfoUser = () => {
     const { slug } = useParams()
-    const navigate = useNavigate();
     const dispatch = useDispatch()
     const { customers, loading } = useSelector((state) => state.customers);
     const { token } = useSelector((state) => state.auth);
@@ -32,11 +29,6 @@ const InfoUser = () => {
     useEffect(() => {
         dispatch(customersRequest(token))
     }, []);
-    // if (!dataCus) {
-    //     return (
-    //         <><NotFound404></NotFound404></>
-    //     )
-    // }
 
     return (
         <div className='bg-gray-50 relative'>
@@ -62,10 +54,12 @@ const InfoUser = () => {
                                 <span>@{dataCustomer?.user_name}</span>
                             </div>
                             <div className=' flex gap-x-5 items-center'>
-                                <div className='p-2 bg-primary text-white text-2xl flex items-center justify-center
-                                    border-2 border-primary rounded-md'>
-                                    <CommentIcon></CommentIcon>
-                                </div>
+                                {!isAuth &&
+                                    <div className='p-2 bg-primary text-white text-2xl flex items-center justify-center
+                                border-2 border-primary rounded-md'>
+                                        <CommentIcon></CommentIcon>
+                                    </div>
+                                }
                                 {/* <Button>Follow</Button> */}
                                 {isAuth && <Button onClick={handleToggle} className='bg-transparent 
                                 !text-primary font-medium border-primary'>

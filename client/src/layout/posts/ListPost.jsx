@@ -29,7 +29,7 @@ const ListPost = ({ data = [], className = '', message = '' }) => {
                 ))
                 : data.length < 1 && message
                     ? message
-                    : arr.map((item, index) => (
+                    : arr.map((_item, index) => (
                         <PostItemSketeton key={index}></PostItemSketeton>
                     ))
             }
@@ -38,10 +38,3 @@ const ListPost = ({ data = [], className = '', message = '' }) => {
 };
 
 export default ListPost;
-{/* <PostItem image={"https://cdn.tgdd.vn/Files/2022/01/25/1412805/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg"} ></PostItem>
-<PostItem image={"https://cdn.tgdd.vn/Files/2022/01/25/1412805/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg"} header={''}></PostItem>
-<PostItem image={"https://cdn.tgdd.vn/Files/2022/01/25/1412805/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg"} ></PostItem>
-<PostItem image={"https://cdn.tgdd.vn/Files/2022/01/25/1412805/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg"} ></PostItem>
-<PostItem image={"https://cdn.tgdd.vn/Files/2022/01/25/1412805/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg"} ></PostItem>
-<PostItem image={"https://cdn.tgdd.vn/Files/2022/01/25/1412805/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg"} ></PostItem>
-<PostItem image={"https://cdn.tgdd.vn/Files/2022/01/25/1412805/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg"} header={' Phở Việt Nam - 1 trong những món ăn hấp dẫn nhất hành tinh'}></PostItem> */}

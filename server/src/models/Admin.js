@@ -17,6 +17,8 @@ const Admin = new Schema(
         address: { type: String, default: "" },
         admin: { type: String, default: true },
         role: { type: String, default: "staff" },
+        status: { type: Boolean, default: true },
+        online: { type: Boolean, default: false },
     },
     {
         timestamps: true,

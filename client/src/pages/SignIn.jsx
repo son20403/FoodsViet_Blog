@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { } from 'react';
 import { Input, InputPassword } from '../components/input';
 import { UserIcon } from '../components/Icon';
-import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../components/button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginRequest } from '../sagas/auth/authSlice';
-import { toast } from 'react-toastify';
 const schemaValidate = Yup.object({
     user_name: Yup.string().required("Vui lòng nhập tên đăng nhập!")
         .max(20, "Tên tài khoản không được dài quá 20 ký tự")
@@ -31,7 +29,7 @@ const SignIn = () => {
                 dispatch(loginRequest(value))
             }
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
         }
     }
     return (

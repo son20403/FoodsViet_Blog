@@ -7,7 +7,6 @@ import NotFound404 from './pages/not-found/NotFound404';
 
 const InfoUser = lazy(() => import("./pages/InfoUser"));
 const DetailPage = lazy(() => import("./pages/DetailPage"));
-const SignIn = lazy(() => import("./pages/SignIn"));
 const SignInSignUp = lazy(() => import("./pages/SignInSignUp"));
 const PostPage = lazy(() => import("./pages/PostPage"));
 const CategoryPage = lazy(() => import("./pages/CategoryPage"));
@@ -35,7 +34,6 @@ function App() {
           <Route path="/add-post" element={<AddNewPosts />} />
         </Route>
         <Route path="/signin" element={<SignInSignUp />} />
-        <Route path="/signup" element={<SignUp />} />
         {!token && <Route path="*" element={<Navigate to="/signin" />} />}
         <Route path="*" element={<NotFound404></NotFound404>} />
       </Routes>

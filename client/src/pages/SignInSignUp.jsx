@@ -4,12 +4,11 @@ import useToggle from '../hooks/useToggle';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 const SignInSignUp = () => {
-    const navigate = useNavigate();
     const { token } = useSelector((state) => state.auth);
-    const { handleToggle, toggle, handleToggleFalse, handleToggleTrue } = useToggle(false);
+    const { handleToggle, toggle, handleToggleFalse } = useToggle(false);
+    const navigate = useNavigate();
     useEffect(() => {
         if (token) navigate('/')
     }, [token]);

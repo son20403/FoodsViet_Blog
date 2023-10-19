@@ -19,7 +19,7 @@ class CustomerController extends BaseController {
             }
             return res.status(200).json(data);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -29,7 +29,6 @@ class CustomerController extends BaseController {
         const id = req.customer.id;
         const formData = req.body;
         const fileData = req.file;
-
         try {
             const hasCustomer = await this.model.findOne({ _id: id });
             if (!hasCustomer) {
@@ -69,7 +68,7 @@ class CustomerController extends BaseController {
             return res.status(200).json({ others, message: "Cập nhật thành công" });
         } catch (error) {
             if (fileData) cloudinary.uploader.destroy(fileData.filename);
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });

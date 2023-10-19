@@ -91,7 +91,7 @@ class BaseController {
             }
             return res.status(200).json(data);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -108,7 +108,7 @@ class BaseController {
                 });
             return res.status(200).json(data);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -125,7 +125,7 @@ class BaseController {
                 });
             return res.status(200).json(data);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });

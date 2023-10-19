@@ -55,7 +55,7 @@ class AdminController extends BaseController {
                 });
             return res.status(200).json({ message: "Xóa thành công" });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -78,7 +78,7 @@ class AdminController extends BaseController {
                 });
             return res.status(200).json({ message: "Xóa thành công" });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -104,7 +104,7 @@ class AdminController extends BaseController {
 
             return res.status(200).json({ message: "Xóa bài viết thành công" });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -139,7 +139,7 @@ class AdminController extends BaseController {
 
             return res.status(200).json({ message: "Xóa category thành công" });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -159,7 +159,7 @@ class AdminController extends BaseController {
 
             return res.status(200).json({ message: "Xóa comment thành công" });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -211,7 +211,7 @@ class AdminController extends BaseController {
                 message: `${dataPostStatus.status === 'pending' ? 'Bạn đã không duyệt bài này' : 'Duyệt bài thành công'}`
             });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -227,7 +227,7 @@ class AdminController extends BaseController {
             }
             return res.status(200).json(data);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -243,7 +243,7 @@ class AdminController extends BaseController {
             }
             return res.status(200).json(data);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -270,7 +270,7 @@ class AdminController extends BaseController {
             const { id_image, updatedAt, createdAt, ...others } = updatedCategory._doc;
             return res.status(200).json({ ...others, message: "Cập nhật thành công" });
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -319,7 +319,7 @@ class AdminController extends BaseController {
             return res.status(200).json({ others, message: "Cập nhật thành công" });
         } catch (error) {
             if (fileData) cloudinary.uploader.destroy(fileData.filename);
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -369,7 +369,7 @@ class AdminController extends BaseController {
             }
             return res.status(200).json(data);
         } catch (error) {
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });
@@ -418,7 +418,7 @@ class AdminController extends BaseController {
             return res.status(200).json({ others, message: "Cập nhật thành công" });
         } catch (error) {
             if (fileData) cloudinary.uploader.destroy(fileData.filename);
-            console.log(error);
+            console.log('err', error);
             return res.status(500).json({
                 message: "Lỗi Server",
             });

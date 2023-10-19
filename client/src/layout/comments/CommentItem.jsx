@@ -63,7 +63,7 @@ const CommentItem = ({ comment, replies = () => { }, countR = 0, id_post }) => {
     return (
         <div className='relative'>
             <div className='flex gap-x-3 lg:gap-x-5 items-start mt-5' >
-                <Avatar className='!h-8 !w-8 lg:!h-10 lg:!w-10' image={customerByComment.image}></Avatar>
+                <Avatar className='!h-8 !w-8 lg:!h-10 lg:!w-10' image={customerByComment?.image}></Avatar>
                 <div className='mt-1 lg:mt-2 flex-1' >
                     <Heading className='text-sm md:text-base font-semibold'>{customerByComment?.full_name}</Heading>
                     <span className='text-[11px] text-text-gray font-medium '>
