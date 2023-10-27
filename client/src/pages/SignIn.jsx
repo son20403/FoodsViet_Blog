@@ -34,9 +34,9 @@ const SignIn = () => {
     }
     return (
         <>
-            <form onSubmit={handleSubmit(handleSignIn)} className="sign-in-form form_signin-signup">
+            <form onSubmit={handleSubmit(handleSignIn)} className="sign-in-form form_signin-signup max-md:">
                 <h2 className="title">Đăng nhập</h2>
-                <div className='flex flex-col gap-6 m-auto w-full bg-white' >
+                <div className='flex flex-col gap-6 m-auto w-full bg-white p-5 rounded-lg' >
                     <Input control={control} type='text' name={'user_name'} errors={errors} placeholder='Tài khoản'
                         value='' ><UserIcon /></Input>
                     <InputPassword control={control} name={'password'} errors={errors} placeholder='Mật khẩu'

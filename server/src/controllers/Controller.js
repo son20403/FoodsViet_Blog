@@ -64,6 +64,7 @@ class BaseController {
             }
             if (user && passwordValid) {
                 const accessToken = generateAccessToken(user);
+                console.log("🚀 ~ file: Controller.js:67 ~ BaseController ~ login= ~ accessToken:", accessToken)
                 const refreshToken = generateRefreshToken(user);
                 res.cookie('refreshToken', refreshToken, {
                     httpOnly: true,
@@ -131,6 +132,31 @@ class BaseController {
             });
         }
     };
+    disable = async (req, res) => {
+        const id = req.query.id;
+        try {
+            const data = await this.model.findOne({ _id: id });
+            if (!data) {
+                return res.status(400).json({
+                    message: "Không tồn tại nội dung này",
+                });
+            }
+            const response = await this.model.findByIdAndUpdate(data._id, { status: 'destroy' });
+            if (!response) {
+                return res.status(400).json({
+                    message: "Có lỗi xảy ra không thê hủy bỏ!",
+                });
+            }
+            return res.status(200).json({
+                message: "Hủy bỏ thành công!"
+            });
+        } catch (error) {
+            console.log('err', error);
+            return res.status(500).json({
+                message: "Lỗi Server",
+            });
+        }
+    }
 
 }
 

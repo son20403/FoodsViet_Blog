@@ -1,9 +1,10 @@
 import { call, put } from "redux-saga/effects";
-import { getAllPost, getDetailPost, getSearchPost, likePost, uploadImage } from "./request";
-import { getDetailPostSuccess, getPostsSuccess, getSearchPostsSuccess, likePostSuccess, postDetailRequest, postsRequest, requestFailure, setLoadingPost } from "./postsSlice";
+import { createPost, getAllPost, getDetailPost, getSearchPost, likePost, updatePost, uploadImage } from "./request";
+import { createPostsSuccess, getDetailPostSuccess, getPostsSuccess, getSearchPostsSuccess, likePostSuccess, postDetailRequest, postsRequest, requestFailure, setLoadingPost, updatePostSuccess } from "./postsSlice";
 import { setErrorGlobal, setNotifyGlobal } from "../global/globalSlice";
 
 export function* handleGetAllPosts({ payload }) {
+    yield put(setLoadingPost(true))
     try {
         const response = yield call(getAllPost, payload);
         if (response?.data) {
@@ -14,10 +15,14 @@ export function* handleGetAllPosts({ payload }) {
     } catch (error) {
         yield handleCommonError(error)
     }
+    yield put(setLoadingPost(false))
+
 }
 export function* handleGetDetailPosts({ payload }) {
+    yield put(setLoadingPost(true))
+
     try {
-        const response = yield call(getDetailPost, payload?.token, payload?.slug);
+        const response = yield call(getDetailPost, payload?.slug);
         if (response?.data) {
             yield put(getDetailPostSuccess(response.data))
         } else {
@@ -26,47 +31,73 @@ export function* handleGetDetailPosts({ payload }) {
     } catch (error) {
         yield handleCommonError(error)
     }
+    yield put(setLoadingPost(false))
+
 }
 export function* handleGetSearchPosts({ payload }) {
     yield put(setLoadingPost(true))
     try {
-        const response = yield call(getSearchPost, payload?.token, payload?.query);
+        const response = yield call(getSearchPost, payload?.query);
         if (response?.data) {
             yield put(getSearchPostsSuccess(response.data))
-        } else {
-            yield put(getDetailPostSuccess({}))
         }
-        yield put(setLoadingPost(false))
     } catch (error) {
         yield handleCommonError(error)
-        yield put(setLoadingPost(false))
     }
+    yield put(setLoadingPost(false))
+}
+export function* handleCreatePosts({ payload }) {
+    yield put(setLoadingPost(true))
+    try {
+        const response = yield call(createPost, payload?.post);
+        if (response?.data) {
+            yield put(createPostsSuccess())
+        }
+        yield put(setNotifyGlobal(response?.data?.message));
+    } catch (error) {
+        yield handleCommonError(error)
+    }
+    yield put(setLoadingPost(false))
 }
 export function* handleLikePost({ payload }) {
+    console.log('')
     try {
-        const response = yield call(likePost, payload?.token, payload?.id);
+        const response = yield call(likePost, payload?.id);
         if (response?.data) {
             yield put(likePostSuccess())
             yield put(setNotifyGlobal(response.data?.message));
+            yield put(postDetailRequest({ slug: payload?.slug }));
         }
     } catch (error) {
         yield handleCommonError(error)
     }
 }
 export function* handleUploadImage({ payload }) {
-    console.log("🚀 ~ file: handles.jsx:57 ~ function*handleUploadImage ~ payload:", payload)
     try {
-        const response = yield call(uploadImage, payload?.token, payload?.image);
+        const response = yield call(uploadImage, payload?.image);
         if (response?.data) {
-            console.log("🚀 ~ file: handles.jsx:61 ~ function*handleUploadImage ~ response:", response)
             yield put(setNotifyGlobal(response.data?.message));
         }
     } catch (error) {
         yield handleCommonError(error)
     }
 }
+export function* handleUpdatePost({ payload }) {
+    yield put(setLoadingPost(true))
+    try {
+        const response = yield call(updatePost, payload?.id, payload?.post);
+        if (response?.data) {
+            yield put(updatePostSuccess());
+            yield put(postDetailRequest({ slug: payload?.slug }));
+            yield put(setNotifyGlobal(response.data?.message));
+        }
+    } catch (error) {
+        yield handleCommonError(error)
+    }
+    yield put(setLoadingPost(false))
+}
 function* handleCommonError(error) {
-    console.log("error:", error)
+    console.log("error post:", error)
     if (error?.code === 'ERR_NETWORK') {
         yield put(requestFailure(error));
         yield put(setErrorGlobal(error?.message));

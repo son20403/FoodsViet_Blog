@@ -71,6 +71,67 @@ class CommentController extends BaseController {
             });
         }
     };
+    updateComment = async (req, res) => {
+        const id = req.query.id;
+        const formData = req.body;
+        try {
+            const hasPost = await this.model.findOne({ _id: id });
+            if (!hasPost) {
+                if (fileData) cloudinary.uploader.destroy(fileData.filename);
+                return res.status(400).json({
+                    message: "Không tồn tại bình luận này",
+                });
+            }
+            const updatedData = {
+                ...formData,
+            }
+            const updatedComment = await this.model.findByIdAndUpdate(id, updatedData, {
+                new: true,
+            });
+            if (!updatedComment) {
+                return res.status(400).json({
+                    message: "Có lỗi xảy ra, không thể update",
+                });
+            }
+            return res.status(200).json({ message: "Cập nhật thành công" });
+        } catch (error) {
+            if (fileData) cloudinary.uploader.destroy(fileData.filename);
+            console.log('err', error);
+            return res.status(500).json({
+                message: "Lỗi Server",
+            });
+        }
+    };
+    deleteComment = async (req, res) => {
+        const id_comment = req.query.id;
+        try {
+            const comment = await this.model.findOne({ _id: id_comment });
+            if (!comment) {
+                return res.status(400).json({
+                    message: "Comment này không tồn tại",
+                });
+            }
+            await this.deleteCommentAndChildren(id_comment);
+            return res.status(200).json({ message: "Xóa comment thành công" });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                message: "Lỗi Server",
+            });
+        }
+    };
+    deleteCommentAndChildren = async (commentId) => {
+        try {
+            const childrenComments = await this.model.find({ parent_comment_id: commentId });
+            for (const childComment of childrenComments) {
+                await this.deleteCommentAndChildren(childComment._id);
+            }
+            await this.model.findByIdAndDelete(commentId);
+        } catch (error) {
+            console.log(error);
+            throw new Error("Lỗi trong quá trình xóa comment.");
+        }
+    }
 }
 
 const commentController = new CommentController(Comment)

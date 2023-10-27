@@ -6,8 +6,8 @@ export function loginAuth(entity) {
 export function registerAuth(entity) {
     return axios.post(`/${COLLECTION_NAME}/register`, entity)
 }
-export function logoutAuth(entity) {
-    return axios.post(`/${COLLECTION_NAME}/logout`, entity)
+export function logoutAuth() {
+    return axios.post(`/${COLLECTION_NAME}/logout`,)
 }
 // headers: {
 //     "Content-Type": "multipart/form-data",

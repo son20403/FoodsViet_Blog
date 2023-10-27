@@ -13,8 +13,11 @@ const middlewareAuth = {
           if (!refreshToken) return res.status(401).json({ message: "Refresh token is missing", status: 'notAuth' });
           jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, customer) => {
             if (err) return res.status(403).json({ message: "Refresh token is not valid", status: 'notAuth' });
-            const newAccessToken = generateAccessToken({ username: customer.username });
-            res.setHeader('new-access-token', newAccessToken);
+            const dataCustomer = { _id: customer?.id, admin: customer?.admin, role: customer?.role }
+            const newAccessToken = generateAccessToken(dataCustomer);
+            if (newAccessToken) {
+              res.setHeader('new-token', newAccessToken);
+            }
             req.customer = customer;
             next();
           });

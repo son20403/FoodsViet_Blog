@@ -41,6 +41,34 @@ const commentsSlice = createSlice({
                 error: null,
             }
         },
+        updateCommentRequest: (state) => {
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            }
+        },
+        updateCommentSuccess: (state) => {
+            return {
+                ...state,
+                loading: false,
+                error: null,
+            }
+        },
+        deleteCommentRequest: (state) => {
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            }
+        },
+        deleteCommentSuccess: (state) => {
+            return {
+                ...state,
+                loading: false,
+                error: null,
+            }
+        },
         setNotify: (state) => {
             return {
                 ...state,
@@ -57,5 +85,5 @@ const commentsSlice = createSlice({
     }
 })
 
-export const { getCommentsSuccess, commentsRequest, requestFailure, postCommentsRequest, postCommentsSuccess, setNotify } = commentsSlice.actions
+export const { getCommentsSuccess, commentsRequest, requestFailure, postCommentsRequest, postCommentsSuccess, setNotify, updateCommentRequest, updateCommentSuccess, deleteCommentRequest, deleteCommentSuccess } = commentsSlice.actions
 export default commentsSlice.reducer

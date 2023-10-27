@@ -5,7 +5,7 @@ import { setErrorGlobal, setNotifyGlobal } from "../global/globalSlice";
 
 export function* handleGetDetailCustomer({ payload }) {
     try {
-        const response = yield call(getDetailCustomer, payload.token, payload.slug);
+        const response = yield call(getDetailCustomer, payload.slug);
         if (response) {
             yield put(customerDetailSuccess(response.data))
         }
@@ -30,7 +30,7 @@ export function* handleUpdateCustomers({ payload }) {
         yield put(setLoadingCustomer(true))
 
         const { response, timeout } = yield race({
-            response: call(updateCustomer, payload?.token, payload?.info),
+            response: call(updateCustomer, payload?.info),
             timeout: delay(15000), // Chờ 5 giây, bạn có thể thay đổi thời gian tùy ý
         });
 
@@ -42,7 +42,7 @@ export function* handleUpdateCustomers({ payload }) {
 
         if (response) {
             try {
-                yield put(customersRequest(payload?.token));
+                yield put(customersRequest());
             } catch (error) {
                 handleCommonError(error)
             }

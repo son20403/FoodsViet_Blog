@@ -1,40 +1,36 @@
 import axios from "../../axios-interceptor/api";
 const COLLECTION_NAME = 'post'
-export function getAllPost(token) {
-    return axios.get(`/${COLLECTION_NAME}/getAll`, {
+export function getAllPost() {
+    return axios.get(`/${COLLECTION_NAME}/getAll`)
+}
+export function getDetailPost(slug) {
+    return axios.get(`/${COLLECTION_NAME}/detail?slug=${slug}`)
+}
+export function createPost(entity) {
+    return axios.post(`/${COLLECTION_NAME}/create`, entity, {
         headers: {
-            token: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
         },
     })
 }
-export function getDetailPost(token, slug) {
-    return axios.get(`/${COLLECTION_NAME}/detail?slug=${slug}`, {
+export function getSearchPost(query) {
+    return axios.get(`/${COLLECTION_NAME}/search?key=${query}`)
+}
+export function likePost(id) {
+    return axios.put(`/${COLLECTION_NAME}/like?id=${id}`, {})
+}
+export function updatePost(id, entity) {
+    return axios.put(`/${COLLECTION_NAME}/updatePost?id=${id}`, entity, {
         headers: {
-            token: `Bearer ${token}`,
-        },
+            "Content-Type": "multipart/form-data",
+        }
     })
 }
-export function getSearchPost(token, query) {
-    return axios.get(`/${COLLECTION_NAME}/search?key=${query}`, {
-        headers: {
-            token: `Bearer ${token}`,
-        },
-    })
-}
-export function likePost(token, id) {
-    return axios.put(`/${COLLECTION_NAME}/like?id=${id}`, {}, {
-        headers: {
-            token: `Bearer ${token}`,
-        },
-    })
-}
-export function uploadImage(token, entity, config) {
-    console.log("🚀 ~ file: request.jsx:32 ~ uploadImage ~ entity:", entity)
+export function uploadImage(entity, config) {
     return axios.post(`/${COLLECTION_NAME}/uploadImage`, entity, {
         ...config,
         headers: {
             "Content-Type": "multipart/form-data",
-            token: `Bearer ${token}`,
         },
     })
 }

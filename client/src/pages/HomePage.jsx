@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Section from '../layout/common/Section';
 import { Heading } from '../components/heading';
 import ListSlide from '../layout/slide/ListSlide';
 import ListCustomer from '../layout/customers/ListCustomer';
 import ListPostHome from '../layout/posts/ListPostHome';
 import ListPost from '../layout/posts/ListPost';
-import { useSelector } from 'react-redux';
-import SlideSwiper from '../layout/slide/SlideSwiper';
-import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 import Banner from '../layout/Banner';
-import Overlay from '../layout/common/Overlay';
+import LoadingRequest from '../layout/loading/LoadingRequest';
+import { postsRequest } from '../sagas/posts/postsSlice';
+import { categoriesRequest } from '../sagas/categories/categoriesSlice';
+import { customersRequest } from '../sagas/customers/customersSlice';
 
 const HomePage = () => {
-    const { posts, error } = useSelector((state) => state.posts)
-    const [dataPosts, setDataPosts] = useState([]);
+    const { posts, loading } = useSelector((state) => state.posts)
     const { categories } = useSelector((state) => state.categories);
     const { customers } = useSelector((state) => state.customers);
-    const [dataCategories, setDataCategories] = useState([]);
+
+    const dispatch = useDispatch()
+
+    const { token } = useSelector((state) => state.auth);
+    const tokenLocal = localStorage.getItem('authToken')
     useEffect(() => {
-        setDataPosts(posts)
-        setDataCategories(categories)
-    }, [posts, categories]);
-    useEffect(() => {
-        if (error) toast.error(error.message)
-    }, [error]);
+        dispatch(postsRequest())
+        dispatch(categoriesRequest())
+        dispatch(customersRequest())
+    }, [token, dispatch, tokenLocal]);
     return (
         <div>
+            <LoadingRequest show={loading}></LoadingRequest>
             <Section className='mb-10'>
                 <Banner></Banner>
             </Section>
@@ -33,33 +36,33 @@ const HomePage = () => {
             <Heading isHeading className='mb-10 mx-2 text-center'>
                 - Danh mục  -
             </Heading>
-            <Section>
-                <div className='w-full h-auto bg-[#f7f7f7] p-2 md:p-10 bg-cover relative'
+            <Section className=' bg-[#f7f7f7] mb-48 relative'>
+                <div className='w-full h-auto bg-[#f7f7f7] bg-fixed p-2 md:p-10 bg-cover relative'
                     style={{ backgroundImage: 'url(./src/assets/image/banner4.jpg)' }}>
-                    <div className='bg-black opacity-80 inset-0 absolute'></div>
-                    <div className='page-content my-20'>
+                    <div className='bg-black opacity-40 inset-0 absolute'></div>
+                    <div className='page-content my-28 mt-10'>
                         <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14 '>
-                            {dataCategories.length > 0 && dataCategories.slice(0, 4).map(item => (
-                                <div key={item._id} className='h-[300px] md:h-[394px] bg-black relative rounded-2xl'>
-                                    <img src={item?.image} alt="" className='w-full h-full object-cover rounded-2xl' />
+                            {categories?.length > 0 && categories?.slice(0, 4).map(item => (
+                                <div key={item._id} className='h-[300px] shadow-2xl md:h-[394px] relative rounded-md'>
+                                    <img src={item?.image} alt="" className='w-full h-full object-cover rounded-md' />
                                     <div className='absolute bottom-0 translate-y-1/2 w-auto min-w-[80%]  
-                                    rounded-2xl px-2 py-1 left-1/2 -translate-x-2/4 bg-primary text-white
+                                    rounded-md px-2 py-1 left-1/2 -translate-x-2/4 bg-primary text-white
                                     font-medium text-center text-xs md:text-base'>{item?.title}</div>
                                 </div>
                             ))}
                         </div>
-                        <Section>
-                            <ListSlide className={'text-white'} data={dataCategories.slice(3)}></ListSlide>
-                        </Section>
                     </div>
                 </div>
+                <Section className=' page-content absolute -bottom-14 left-1/2 -translate-x-1/2 translate-y-1/2'>
+                    <ListSlide className={'text-black'} data={categories?.slice(3)}></ListSlide>
+                </Section>
             </Section>
-            <div className='lg:px-2'>
+            <div className='lg:px-0'>
                 <Heading isHeading className='mb-10 mx-2 text-center'>
                     - Bài viết mới nhất -
                 </Heading>
-                <Section className='page-content '>
-                    <ListPostHome data={dataPosts?.slice(0, 10)} isHome></ListPostHome>
+                <Section className='page- '>
+                    <ListPostHome data={posts?.slice(0, 10)} isHome></ListPostHome>
                 </Section>
                 <Heading isHeading className='mb-10 mx-2 text-center'>
                     - Người dùng nỗi bật -
@@ -71,7 +74,7 @@ const HomePage = () => {
                     <Heading isHeading className='mb-10 mx-2 text-center'>
                         - Bài viết -
                     </Heading>
-                    <ListPost data={dataPosts?.slice(10)}></ListPost>
+                    <ListPost data={posts?.slice(10)}></ListPost>
                 </Section>
             </div>
         </div>

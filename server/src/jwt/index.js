@@ -17,8 +17,8 @@ const generateRefreshToken = (customer) => {
     return jwt.sign(
         {
             id: customer._id,
-            admin: customer.admin,
             role: customer.role,
+            admin: customer.admin,
         },
         process.env.JWT_REFRESH_KEY,
         {

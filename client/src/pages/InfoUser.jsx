@@ -10,6 +10,8 @@ import useToggle from '../hooks/useToggle';
 import { customersRequest } from '../sagas/customers/customersSlice';
 import EditCustomer from '../layout/customers/EditCustomer';
 import LoadingRequest from '../layout/loading/LoadingRequest';
+import BannerCommon from '../layout/common/BannerCommon';
+import { postsRequest } from '../sagas/posts/postsSlice';
 
 const InfoUser = () => {
     const { slug } = useParams()
@@ -17,27 +19,22 @@ const InfoUser = () => {
     const { customers, loading } = useSelector((state) => state.customers);
     const { token } = useSelector((state) => state.auth);
     const { handleToggle, toggle } = useToggle(false)
-    const { posts } = useSelector((state) => state.posts);
+    const { posts, loading: loadingPost } = useSelector((state) => state.posts);
     const { infoAuth } = useSelector((state) => state.auth);
     const dataCustomer = customers.filter((cus) => cus.slug === slug)[0]
     const dataPostsByCustomer = posts.filter((post) => post.id_customer === dataCustomer?._id) || [1]
     const isAuth = dataCustomer?._id === infoAuth?._id
-    const [dataCus, setdataCus] = useState();
     useEffect(() => {
-        setdataCus(dataCustomer)
-    }, [dataCustomer]);
-    useEffect(() => {
-        dispatch(customersRequest(token))
+        dispatch(customersRequest())
+        dispatch(postsRequest())
     }, []);
 
     return (
         <div className='bg-gray-50 relative'>
             <LoadingRequest show={loading}></LoadingRequest>
+            <LoadingRequest show={loadingPost}></LoadingRequest>
             <div className='w-full h-auto flex flex-col gap-5 '>
-                <div className='relative w-full h-full max-h-[300px] overflow-hidden flex items-center'>
-                    <div className='absolute inset-0 bg-black bg-opacity-40'></div>
-                    <img src="../src/assets/image/banner-user.jpg" className='w-full h-full object-cover' alt="" />
-                </div>
+                <BannerCommon className='py-16 bg-bottom' image={'../src/assets/image/banner-user.jpg'} />
                 <div className='page-content relative h-[240px] md:h-[120px] lg:h-[150px] flex justify-between bg-white
                     rounded-xl flex-col items-center'>
                     <div className=' flex flex-col items-center md:flex-row w-full absolute bottom-0 left-1/2 
@@ -88,7 +85,7 @@ const InfoUser = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='flex-1 bg-white rounded-xl p-5 flex flex-col gap-y-10'>
+                    <div className='flex-1 bg-white rounded-xl pt-5 md:p-5 flex flex-col gap-y-10'>
                         <h1 className='font-bold text-xl text-primary text-center md:text-start'>Danh sách bài viết</h1>
                         <ListPost data={dataPostsByCustomer} message={'Chưa có bài viết nào!'} className='!grid-cols-1 md:!grid-cols-1 lg:!grid-cols-2'>
                         </ListPost>

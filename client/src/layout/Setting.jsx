@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { startTransition } from 'react';
 import Overlay from './common/Overlay';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../sagas/auth/authSlice';
@@ -10,9 +10,11 @@ const Setting = ({ show, onClick }) => {
     const { infoAuth } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
     const handleLogout = () => {
-        dispatch(logout())
-        navigate('/signin')
-        dispatch(closeSetting())
+        startTransition(() => {
+            dispatch(logout());
+            navigate('/signin');
+            dispatch(closeSetting());
+        });
     }
     return (
         <>

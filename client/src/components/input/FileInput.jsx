@@ -18,7 +18,7 @@ const FileInput = ({ name, className = '', oldImage, errors, control, isAvatar =
     const handleSetImage = () => {
         clearPreview()
         setImageOld('')
-        inputField.onChange('');
+        inputField.onChange(null);
     }
     const handleOnChange = (e) => {
         inputField.onChange(e.target.files[0]);
@@ -45,19 +45,18 @@ const FileInput = ({ name, className = '', oldImage, errors, control, isAvatar =
                                 <img src='../../src/assets/img-upload.png'
                                     alt="preview" className={`${isAvatar ? 'w-12 h-12' : 'w-16 h-16'}  object-cover`} />
                                 <p className={`${isAvatar ? 'text-xs' : 'text-sm '} font-body font-semibold `}
-                                >Choose image</p>
+                                >Chọn hình ảnh</p>
                             </div>
                         </div>
                     }
                 </label>
                 {preview &&
-                    <PreviewImage imageOld={imageOld} isAvatar={isAvatar} preview={preview}
+                    <PreviewImage isAvatar={isAvatar} preview={preview}
                         onClick={handleSetImage}></PreviewImage>
                 }
                 {!preview && imageOld &&
-                    <PreviewImage imageOld={imageOld} isAvatar={isAvatar} preview={preview}
+                    <PreviewImage imageOld={imageOld} isAvatar={isAvatar}
                         onClick={handleSetImage}></PreviewImage>
-
                 }
             </div>
             {isErr ? (

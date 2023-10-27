@@ -40,9 +40,9 @@ const SignUp = ({ onClick = () => { } }) => {
     }, [error]);
     return (
         <>
-            <form onSubmit={handleSubmit(handleSignUp)} className="sign-up-form form_signin-signup">
+            <form onSubmit={handleSubmit(handleSignUp)} className="sign-up-form form_signin-signup ">
                 <h2 className="title">Đăng Ký</h2>
-                <div className='flex flex-col gap-4 w-full bg-white' >
+                <div className='flex flex-col gap-4 w-full bg-white  p-5 rounded-lg' >
                     <Input control={control} type='text' name={'user_name'} errors={errors} placeholder='Tài khoản'
                         value='' ><UserIcon /></Input>
                     <Input control={control} type='text' name={'full_name'} errors={errors} placeholder='Họ và tên'

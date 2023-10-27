@@ -1,15 +1,13 @@
 import Post from '../models/Post'
 const cloudinary = require("cloudinary").v2;
-const _ = require("lodash");
 import BaseController from './Controller'
-const unidecode = require("unidecode");
 class PostController extends BaseController {
     constructor(model) {
         super(model)
     }
     create = async (req, res) => {
         const id_customer = req.customer.id;
-        const isAdmin = req.customer.admin;
+        const isAdmin = req.customer.admin || null
         const formData = req.body;
         const fileData = req.file;
         const image = fileData?.path || '';
@@ -25,12 +23,12 @@ class PostController extends BaseController {
             const dataPost = await Post(modelPost).save();
             if (dataPost) {
                 return res.status(200).json({
-                    message: "Thêm thành công",
+                    message: "Tạo bài viết thành công",
                 });
             } else {
                 if (fileData) cloudinary.uploader.destroy(id_image);
                 return res.status(401).json({
-                    message: "Thêm thất bại",
+                    message: "Tạo bài viết thất bại",
                 });
             }
         } catch (error) {
@@ -140,9 +138,14 @@ class PostController extends BaseController {
                 // const key = unidecode(value)
                 const keyRegex = new RegExp(value, 'i')
                 const query = {
-                    $or: [
-                        { title: { $regex: keyRegex } },
-                        { slug: { $regex: keyRegex } },
+                    $and: [
+                        {
+                            $or: [
+                                { title: { $regex: keyRegex } },
+                                { slug: { $regex: keyRegex } },
+                            ],
+                        },
+                        { status: 'approved' } // Điều kiện trạng thái "approved"
                     ],
                 };
                 const dataPost = await this.model.find(query);

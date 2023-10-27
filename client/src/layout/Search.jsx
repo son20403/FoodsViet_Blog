@@ -4,9 +4,8 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Heading } from '../components/heading';
 import Overlay from './common/Overlay';
 import { SearchIcon } from '../components/Icon';
-import { Button, Input } from '@material-tailwind/react';
+import { Input } from '@material-tailwind/react';
 import { useDispatch, useSelector } from 'react-redux';
-import removeAccents from 'remove-accents';
 import _ from 'lodash'
 import { Link } from 'react-router-dom';
 import { searchPostsRequest } from '../sagas/posts/postsSlice';
@@ -15,17 +14,14 @@ import Loading from './loading/Loading';
 const Search = ({ showSearch, handleShowSearch }) => {
     const dispatch = useDispatch()
     const { search_posts, loading } = useSelector((state) => state.posts)
-    const { token } = useSelector((state) => state.auth)
     const [query, setQuery] = useState('');
     const handleOnChange = _.debounce((e) => {
         setQuery(e.target.value)
     }, 1000)
     useEffect(() => {
-        dispatch(searchPostsRequest({ token, query }))
+        dispatch(searchPostsRequest({ query }))
     }, [query]);
-    useEffect(() => {
-        setQuery('')
-    }, [location.pathname]);
+
     return (
         <>
             <Overlay show={showSearch} onClick={handleShowSearch}></Overlay>
@@ -40,8 +36,7 @@ const Search = ({ showSearch, handleShowSearch }) => {
                 <div className='page-content'>
                     <Input variant="standard" label={'Nhập nội dung tìm kiếm'} onChange={handleOnChange}
                         icon={<SearchIcon />}></Input>
-
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col  overflow-y-auto max-h-full'>
                         {loading && <Loading />}
                         {!loading && search_posts?.length > 0 ? search_posts?.slice(0, 5).map((item) => (
                             <SearchItem key={item._id} data={item}></SearchItem>
@@ -62,16 +57,16 @@ const Search = ({ showSearch, handleShowSearch }) => {
 };
 const SearchItem = ({ data }) => {
     return (
-        <div className='flex gap-3 items-center border-b py-5 last:border-b-0'>
+        <Link to={`/detail/${data?.slug}`} className='flex gap-3 items-center border-b py-5 last:border-b-0'>
             <div className=' w-14 h-14 overflow-hidden rounded-md'>
                 <img src={data?.image} alt=""
                     className='w-full h-full object-cover' />
             </div>
             <div className='flex-1'>
-                <Heading className='text-sm'>
+                <Heading className='text-xs md:text-sm'>
                     {data?.title}</Heading>
             </div>
-        </div>
+        </Link>
     )
 }
 

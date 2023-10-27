@@ -13,6 +13,11 @@ import * as Yup from "yup";
 import PageWrap from '../layout/common/PageWrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { categoriesRequest } from '../sagas/categories/categoriesSlice';
+import Section from '../layout/common/Section';
+import BannerCommon from '../layout/common/BannerCommon';
+import { getDate, getTimestamp } from '../hooks/useGetTime';
+import { createPostsRequest } from '../sagas/posts/postsSlice';
+import LoadingRequest from '../layout/loading/LoadingRequest';
 const schemaValidate = Yup.object({
     title: Yup.string().required("Vui lòng nhập tiêu đề!"),
     content: Yup.string().required("Vui lòng nhập nội dung!"),
@@ -25,44 +30,58 @@ const AddNewPosts = () => {
     const { token } = useSelector((state) => state.auth)
     const { handleSubmit, formState: { errors, isSubmitting, isValid }, control } =
         useForm({ resolver: yupResolver(schemaValidate), mode: 'onBlur', })
-    const { categories } = useSelector((state) => state.categories)
+    const { categories, loading } = useSelector((state) => state.categories)
+    console.log("🚀 ~ file: AddNewPosts.jsx:34 ~ AddNewPosts ~ loading:", loading)
     const handleSubmits = (value) => {
-        console.log(value)
+        const date = getDate()
+        const timestamps = getTimestamp()
+        const post = {
+            ...value,
+            date,
+            timestamps
+        }
+        dispatch(createPostsRequest({ post }))
     }
     useEffect(() => {
-        dispatch(categoriesRequest(token))
+        dispatch(categoriesRequest())
     }, []);
     return (
-        <PageWrap>
-            <div className='page-content mt-5 px-2'>
-                <Heading isHeading>Thêm bài viết </Heading>
-                <form onSubmit={handleSubmit(handleSubmits)} className='mb-10 text-center'>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 pt-10 mb-10'>
-                        <Field>
-                            <Input control={control} errors={errors} value='' name='title'
-                                placeholder='Nhập tiêu đề bài viết' type='text' >
-                                <BookmarkIcon />
-                            </Input>
-                        </Field>
-                        <Field>
-                            <Select data={categories} control={control} name={'category'} />
-                        </Field>
-                        <div className=' col-span-1 md:col-span-2 mb-10'>
-                            <Label htmlFor={"image"}>Hình ảnh</Label>
-                            <FileInput
-                                control={control} name={'image'} errors={errors} lable={'Hình ảnh'} />
-                        </div>
-                        <div className=' col-span-1 md:col-span-2'>
+        <>
+            <LoadingRequest show={loading}></LoadingRequest>
+            <Section className='mb-10'>
+                <BannerCommon image={'./src/assets/image/bg-add-post.jpg'} title={'Tạo bài viết'} />
+            </Section>
+            <PageWrap>
+                <div className='page-content mt-5 px-2'>
+                    <Heading isHeading>Thêm bài viết </Heading>
+                    <form onSubmit={handleSubmit(handleSubmits)} className='mb-10 text-center'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 pt-10 mb-10'>
                             <Field>
-                                <Label htmlFor={'content'}>Nội dung</Label>
-                                <Textarea control={control} errors={errors} name={'content'} />
+                                <Input control={control} errors={errors} value='' name='title'
+                                    placeholder='Nhập tiêu đề bài viết' type='text' >
+                                    <BookmarkIcon />
+                                </Input>
                             </Field>
+                            <Field>
+                                <Select data={categories} control={control} name={'category'} />
+                            </Field>
+                            <div className=' col-span-1 md:col-span-2 mb-10'>
+                                <Label htmlFor={"image"}>Hình ảnh</Label>
+                                <FileInput
+                                    control={control} name={'image'} errors={errors} lable={'Hình ảnh'} />
+                            </div>
+                            <div className=' col-span-1 md:col-span-2'>
+                                <Field>
+                                    <Label htmlFor={'content'}>Nội dung</Label>
+                                    <Textarea control={control} errors={errors} name={'content'} />
+                                </Field>
+                            </div>
                         </div>
-                    </div>
-                    <Button type='submit' className=' mx-auto'>Thêm bài viết</Button>
-                </form>
-            </div>
-        </PageWrap>
+                        <Button type='submit' className=' mx-auto'>Thêm bài viết</Button>
+                    </form>
+                </div>
+            </PageWrap>
+        </>
     );
 };
 

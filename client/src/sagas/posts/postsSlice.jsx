@@ -15,7 +15,7 @@ const postsSlice = createSlice({
         postsRequest: (state) => {
             return {
                 ...state,
-                error: null,
+                loading: true,
             }
         },
         getPostsSuccess: (state, action) => {
@@ -23,12 +23,26 @@ const postsSlice = createSlice({
                 ...state,
                 posts: action.payload,
                 error: null,
+                loading: false
+            }
+        },
+        createPostsRequest: (state) => {
+            return {
+                ...state,
+                loading: true,
+            }
+        },
+        createPostsSuccess: (state) => {
+            return {
+                ...state,
+                error: null,
+                loading: false
             }
         },
         uploadImageRequest: (state) => {
             return {
                 ...state,
-                error: null,
+                loading: true
             }
         },
         // uploadImageSuccess: (state) => {
@@ -40,7 +54,7 @@ const postsSlice = createSlice({
         searchPostsRequest: (state) => {
             return {
                 ...state,
-                error: null,
+                loading: true
             }
         },
         getSearchPostsSuccess: (state, action) => {
@@ -48,12 +62,14 @@ const postsSlice = createSlice({
                 ...state,
                 search_posts: action.payload,
                 error: null,
+                loading: false
             }
         },
         postDetailRequest: (state) => {
             return {
                 ...state,
                 error: null,
+                loading: true
             }
         },
         getDetailPostSuccess: (state, action) => {
@@ -61,18 +77,35 @@ const postsSlice = createSlice({
                 ...state,
                 detail_post: action.payload,
                 error: null,
+                loading: false
             }
         },
         likePostRequest: (state) => {
             return {
                 ...state,
                 error: null,
+                loading: true
             }
         },
         likePostSuccess: (state) => {
             return {
                 ...state,
                 error: null,
+                loading: false
+            }
+        },
+        updatePostRequest: (state) => {
+            return {
+                ...state,
+                error: null,
+                loading: true
+            }
+        },
+        updatePostSuccess: (state) => {
+            return {
+                ...state,
+                error: null,
+                loading: false
             }
         },
         requestFailure: (state, action) => {
@@ -91,5 +124,5 @@ const postsSlice = createSlice({
     }
 })
 
-export const { getPostsSuccess, postsRequest, requestFailure, likePostRequest, likePostSuccess, setLoadingPost, getDetailPostSuccess, postDetailRequest, getSearchPostsSuccess, searchPostsRequest, uploadImageRequest } = postsSlice.actions
+export const { getPostsSuccess, postsRequest, requestFailure, likePostRequest, likePostSuccess, setLoadingPost, getDetailPostSuccess, postDetailRequest, getSearchPostsSuccess, searchPostsRequest, uploadImageRequest, createPostsRequest, createPostsSuccess, updatePostRequest, updatePostSuccess } = postsSlice.actions
 export default postsSlice.reducer

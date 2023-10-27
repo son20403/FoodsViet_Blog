@@ -34,3 +34,24 @@
 .zoom-exit-active .overlay {
     opacity: 0;
 }
+
+/* modal zoom */
+
+.zoom-enter .zoom {
+    opacity: 0;
+    transform: scale(0.5)
+}
+
+.zoom-enter-active .zoom {
+    opacity: 1;
+    transform: scale(1)
+}
+
+.zoom-exit .zoom {
+    opacity: 1;
+}
+
+.zoom-exit-active .zoom {
+    opacity: 0;
+    transform: scale(0.5)
+}

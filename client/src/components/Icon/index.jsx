@@ -5,6 +5,7 @@ import CalendarIcon from "./CalendarIcon";
 import CloseIcon from "./CloseIcon";
 import CommentIcon from "./CommentIcon";
 import EditIcon from "./EditIcon";
+import EllipsisIcon from "./EllipsisIcon";
 import EmailIcon from "./EmailIcon";
 import EyeOffIcon from "./EyeOffIcon";
 import EyeOpenIcon from "./EyeOpenIcon";
@@ -20,6 +21,7 @@ import TwitterIcon from "./TwitterIcon";
 import UserIcon from "./UserIcon";
 import YoutuberIcon from "./YoutuberIcon";
 export {
+    EllipsisIcon,
     CloseIcon,
     SearchIcon,
     ArrowNextIcon,

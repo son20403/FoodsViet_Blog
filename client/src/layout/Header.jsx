@@ -51,8 +51,8 @@ const Header = () => {
         }
     }, []);
     return (
-        <div className={`fixed  top-0 left-0 right-0 z-[10]
-        ${isScroll ? 'bg-white text-black' : 'md:text-white'}`}>
+        <div className={`fixed  top-0 left-0 right-0 z-[10] duration-300 
+        ${isScroll ? 'bg-white text-black shadow-3xl' : 'md:text-white'}`}>
             <Search showSearch={showSearch} handleShowSearch={handleShowSearch}></Search>
             <div className='page-content relative px-2 md:px-3 lg:px-2 flex items-center py-2 justify-between'>
                 <div className='z-[10]'>

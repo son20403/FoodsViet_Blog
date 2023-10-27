@@ -3,11 +3,9 @@ import Editor from 'ckeditor5-custom-build';
 import React, { useEffect, useRef } from 'react';
 import { useController } from 'react-hook-form';
 import { Typography } from '../typography';
-import { useSelector } from 'react-redux';
 import { uploadPlugin } from './plugin';
 import './style.css'
 const Textarea = ({ name, control, value = '', errors }) => {
-    const { token } = useSelector((state) => state.auth)
     const { field } = useController({ name, control, defaultValue: value, rules: { required: true } });
 
     const isErr = !!errors?.[name]

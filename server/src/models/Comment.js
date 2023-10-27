@@ -9,7 +9,7 @@ const Comment = new Schema(
         id_customer: { type: String },
         id_post: { type: String },
         parent_comment_id: { type: String, default: '' },
-        status: { type: String, default: "pending" },
+        status: { type: String, default: "approved" },
     },
     {
         timestamps: true,

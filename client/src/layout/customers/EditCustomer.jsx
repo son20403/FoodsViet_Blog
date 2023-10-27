@@ -31,7 +31,7 @@ const EditCustomer = ({ data, show, onClick = () => { } }) => {
         try {
             dispatch(setLoadingCustomer(true))
             const info = { ...value };
-            dispatch(updateCustomerRequest({ token, info }));
+            dispatch(updateCustomerRequest({ info }));
             dispatch(setNotifyGlobal(''));
             onClick()
             resetImageField()
@@ -44,8 +44,7 @@ const EditCustomer = ({ data, show, onClick = () => { } }) => {
     };
     return (
         <ModalBase onClose={onClick} visible={show}>
-            <Overlay show={show} onClick={onClick}></Overlay>
-            <div className={`content absolute w-full top-20  transition-all bg-white z-[8] p-10 pb-20`}>
+            <div className={`content absolute md:fixed w-full top-20  transition-all bg-white z-[8] p-10 pb-20`}>
                 <div className='absolute right-2 top-2 text-2xl cursor-pointer'
                     onClick={onClick}><CloseIcon></CloseIcon></div>
                 <form onSubmit={handleSubmit(handleEditUser)} className=' px-2'>

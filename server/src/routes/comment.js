@@ -4,8 +4,9 @@ import commentController from '../controllers/CommentController'
 import middlewareAuth from '../middlewares/auth'
 
 router.post('/create', middlewareAuth.verifyToken, commentController.create)
-router.get('/get_all_comments', commentController.get_all_comments)
-router.get('/getByPost', commentController.getByPost)
-router.get('/detailCategory?:id', commentController.detail)
+router.put('/updateComment', middlewareAuth.verifyToken, commentController.updateComment)
+router.get('/get_all_comments', middlewareAuth.verifyToken, commentController.get_all_comments)
+router.get('/getByPost', middlewareAuth.verifyToken, commentController.getByPost)
+router.delete('/deleteComment?:id', middlewareAuth.verifyToken, commentController.deleteComment)
 
 module.exports = router;

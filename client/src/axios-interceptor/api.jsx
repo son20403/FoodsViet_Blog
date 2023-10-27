@@ -3,8 +3,8 @@ import axios from 'axios';
 import BASE_URL from '../connect';
 import store from '../sagas/configureStore';
 import { logout, refreshAccessTokenSuccess } from '../sagas/auth/authSlice';
-import { toast } from 'react-toastify';
 import { setErrorGlobal } from '../sagas/global/globalSlice';
+import { getObjectFromLocalStorage } from '../utils/localstorage';
 
 const api = axios.create({
     baseURL: BASE_URL,
@@ -12,19 +12,18 @@ const api = axios.create({
 
 api.interceptors.request.use(config => {
     config.withCredentials = true;
+    config.headers['token'] = `Bearer ${getObjectFromLocalStorage('authToken')}`
     return config;
 }, error => {
+    console.log("🚀 ~ file: api.jsx:18 ~ error:", error)
     return Promise.reject(error);
 });
 
 api.interceptors.response.use((response) => {
-    const newAccessToken = response.headers['new-access-token'];
-    const oldAccessToken = newAccessToken
-    if (oldAccessToken === newAccessToken) return response
+    const newAccessToken = response.headers['new-token'];
     if (newAccessToken) {
-        api.defaults.headers['Authorization'] = `Bearer ${newAccessToken}`;  // Cập nhật headers
+        api.defaults.headers['Authentication'] = `Bearer ${newAccessToken}`;  // Cập nhật headers
         store.dispatch(refreshAccessTokenSuccess(newAccessToken));
-        localStorage.setItem('authToken', newAccessToken);
     }
     return response;
 }, (error) => {
